@@ -3,13 +3,10 @@
   const cors = require("cors");
   const app = express();
 
-  const corsOptions = {
-<<<<<<< HEAD
-    origin: "http://localhost:8081" 
-=======
-    origin: "http://localhost:8081"
->>>>>>> 5731875378a930d9749f9bb9bdad9c1eedaa7528
-  };
+const corsOptions = {
+  origin: "http://localhost:8081"
+};
+
   
   app.use(cors(corsOptions));
   app.use(bodyParser.json());
