@@ -4,7 +4,11 @@
   const app = express();
 
   const corsOptions = {
+<<<<<<< HEAD
     origin: "http://localhost:8081" 
+=======
+    origin: "http://localhost:8081"
+>>>>>>> 5731875378a930d9749f9bb9bdad9c1eedaa7528
   };
   
   app.use(cors(corsOptions));
@@ -33,4 +37,4 @@
   app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}.`);
   });
-    
+     
