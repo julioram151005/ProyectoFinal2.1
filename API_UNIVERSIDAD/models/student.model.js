@@ -1,3 +1,5 @@
+const { PASSWORD } = require("../config/db.config");
+
 module.exports = (sequelize, Sequelize) => {
     const Student = sequelize.define("student", {
         id: {
@@ -11,6 +13,9 @@ module.exports = (sequelize, Sequelize) => {
         email: {
             type: Sequelize.STRING
         },
+        password: {
+            type: Sequelize.STRING
+        },        
         carnet: {
             type: Sequelize.INTEGER
         }

@@ -13,8 +13,9 @@ exports.create = (req, res) => {
 
     const teacher = {
         nombre: req.body.nombre,
-        email: req.body.apellido,  
-        carnet: req.body.direccion 
+        email: req.body.apellido, 
+        password: req.body.password, 
+        carnet: req.body.direccion
     };
 
 

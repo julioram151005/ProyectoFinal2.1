@@ -27,6 +27,7 @@ const corsOptions = {
   require("./API_UNIVERSIDAD/routes/student.route.js")(app);
   require("./API_UNIVERSIDAD/routes/teacher.route.js")(app);
   require("./API_UNIVERSIDAD/routes/curso.route.js")(app);
+  require("./API_UNIVERSIDAD/routes/asignacion.router.js")(app);
 
   app.get("/", (req, res) => {
     res.json({ message: "Bienvenido a la API de la UMG." });

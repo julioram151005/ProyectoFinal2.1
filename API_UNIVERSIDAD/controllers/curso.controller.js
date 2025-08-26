@@ -15,6 +15,7 @@ exports.create = (req, res) => {
         nombre: req.body.nombre,
         codigo: req.body.codigo,  
         semestre: req.body.semestre,
+        descripcion: req.body.descripcion,
         id_teacher: req.body.id_teacher  
     };
 
@@ -37,7 +38,7 @@ exports.findAll = (req, res) => {
 
     Curso.findAll({
         where: condition,
-        include: [{ model: Teacher }]  // 👈 incluir datos del profesor
+        include: [{ model: Teacher }] 
     })
         .then(data => res.send(data))
         .catch(err => {

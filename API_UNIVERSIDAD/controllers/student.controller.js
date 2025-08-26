@@ -13,7 +13,8 @@ exports.create = (req, res) => {
 
     const student = {
         nombre: req.body.nombre,
-        email: req.body.apellido,  
+        email: req.body.apellido,
+        password: req.body.password,  
         carnet: req.body.direccion 
     };
 
