@@ -5,10 +5,17 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
+        id_teacher: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'teachers',
+                key: 'id'
+            }
+        },
         nombre: {
             type: Sequelize.STRING
         },
-        código: {
+        codigo: { 
             type: Sequelize.INTEGER
         },
         semestre: {
@@ -16,4 +23,4 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
     return Curso;
-}; 
+};
