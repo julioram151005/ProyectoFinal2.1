@@ -1,5 +1,5 @@
 const db = require("../models");
-const Student = db.student; 
+const Student = db.students; 
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
@@ -13,9 +13,10 @@ exports.create = (req, res) => {
 
     const student = {
         nombre: req.body.nombre,
-        email: req.body.apellido,
+        email: req.body.email,
         password: req.body.password,  
-        carnet: req.body.direccion 
+        carnet: req.body.carnet
+        ,estado: req.body.estado ? req.body.estado : true 
     };
 
 

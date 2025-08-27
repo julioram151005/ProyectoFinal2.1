@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Student = sequelize.define("student", {
+    const Admin = sequelize.define("admin", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -13,14 +13,10 @@ module.exports = (sequelize, Sequelize) => {
         },
         password: {
             type: Sequelize.STRING
-        },        
-        carnet: {
-            type: Sequelize.INTEGER
-        },        
+        },
         estado: {
             type: Sequelize.BOOLEAN
-            ,defaultValue: true
-        }
+        },
     });
-    return Student;
+    return Admin;
 }; 

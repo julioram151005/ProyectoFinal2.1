@@ -3,6 +3,7 @@ const Asignacion = db.asignacion;
 const Op = db.Sequelize.Op;
 
 
+
 exports.create = (req, res) => {
     if (!req.body.id_student || !req.body.id_curse) {
         return res.status(400).send({

@@ -16,6 +16,10 @@ module.exports = (sequelize, Sequelize) => {
         },           
         especialidad: {
             type: Sequelize.STRING
+        },        
+        estado: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: true
         }
     });
     return Teacher;
