@@ -3,9 +3,9 @@
   const cors = require("cors");
   const app = express();
 
-const corsOptions = {
+  const corsOptions = {
     origin: "*"
-};
+  };
 
   
   app.use(cors(corsOptions));
