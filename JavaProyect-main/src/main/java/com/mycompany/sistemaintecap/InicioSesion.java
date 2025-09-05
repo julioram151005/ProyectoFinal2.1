@@ -1,16 +1,20 @@
+package com.mycompany.sistemaintecap;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.sistemaintecap;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import com.umg.proyect.model.Student;
+import com.umg.proyect.service.StudentService;
 
+import javax.swing.*;
 
 public class InicioSesion extends javax.swing.JFrame {
-    
+private final StudentService service = new StudentService();  
     public InicioSesion() {
         initComponents();
         
@@ -36,17 +40,17 @@ public class InicioSesion extends javax.swing.JFrame {
         pfondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtmail = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
-        txtcarnet = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtCarnet = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnMod = new javax.swing.JButton();
         btnCrear = new javax.swing.JButton();
         lblimg2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtmail1 = new javax.swing.JTextField();
+        txtContra = new javax.swing.JTextField();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,34 +67,34 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel2.setText("Nombre:");
         pfondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
 
-        txtmail.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmailActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
-        pfondo.add(txtmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 200, 30));
+        pfondo.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 200, 30));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Carnet");
         pfondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
 
-        txtnombre.setEditable(false);
-        txtnombre.setBackground(new java.awt.Color(255, 255, 255));
-        txtnombre.setForeground(new java.awt.Color(60, 63, 65));
-        txtnombre.setCaretColor(new java.awt.Color(0, 0, 102));
-        txtnombre.addActionListener(new java.awt.event.ActionListener() {
+        txtNombre.setEditable(false);
+        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
+        txtNombre.setForeground(new java.awt.Color(60, 63, 65));
+        txtNombre.setCaretColor(new java.awt.Color(0, 0, 102));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombreActionPerformed(evt);
+                txtNombreActionPerformed(evt);
             }
         });
-        pfondo.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
+        pfondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
 
-        txtcarnet.addActionListener(new java.awt.event.ActionListener() {
+        txtCarnet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcarnetActionPerformed(evt);
+                txtCarnetActionPerformed(evt);
             }
         });
-        pfondo.add(txtcarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 200, 30));
+        pfondo.add(txtCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 200, 30));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Email");
@@ -120,6 +124,11 @@ public class InicioSesion extends javax.swing.JFrame {
         btnCrear.setForeground(new java.awt.Color(255, 255, 255));
         btnCrear.setText("Crear");
         btnCrear.setToolTipText("");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
         pfondo.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 280, -1));
         pfondo.add(lblimg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 370, 370));
 
@@ -127,12 +136,12 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel6.setText("Password");
         pfondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 50, 10));
 
-        txtmail1.addActionListener(new java.awt.event.ActionListener() {
+        txtContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmail1ActionPerformed(evt);
+                txtContraActionPerformed(evt);
             }
         });
-        pfondo.add(txtmail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
+        pfondo.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
         pfondo.add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 470));
 
         getContentPane().add(pfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 550));
@@ -140,17 +149,17 @@ public class InicioSesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmailActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtmailActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreActionPerformed
+    }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void txtcarnetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcarnetActionPerformed
+    private void txtCarnetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCarnetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtcarnetActionPerformed
+    }//GEN-LAST:event_txtCarnetActionPerformed
 
     private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
         // TODO add your handling code here:
@@ -160,13 +169,37 @@ public class InicioSesion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void txtmail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmail1ActionPerformed
+    private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtmail1ActionPerformed
+    }//GEN-LAST:event_txtContraActionPerformed
+
+    private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
+    try {
+        Student m = new Student();
+        m.setNombre(txtNombre.getText());
+        m.setEmail(txtEmail.getText());
+        m.setPassword(txtContra.getText());
+        m.setCarnet(txtCarnet.getText());
+
+        service.createStudent(m); 
+
+        JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.");
+        cleanFields();
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error al agregar el estudiante: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnCrearActionPerformed
 
     /**
      * @param args the command line arguments
      */
+
+        private void cleanFields(){
+        txtNombre.setText("");
+        txtEmail.setText("");
+        txtContra.setText("");
+        txtCarnet.setText("");
+    }    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -223,9 +256,9 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel lblfondo;
     private javax.swing.JLabel lblimg2;
     private javax.swing.JPanel pfondo;
-    private javax.swing.JTextField txtcarnet;
-    private javax.swing.JTextField txtmail;
-    private javax.swing.JTextField txtmail1;
-    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtCarnet;
+    private javax.swing.JTextField txtContra;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

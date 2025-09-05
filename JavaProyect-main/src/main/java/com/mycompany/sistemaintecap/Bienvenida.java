@@ -43,7 +43,7 @@ public class Bienvenida extends javax.swing.JFrame {
         btnEstudiante.setBackground(new java.awt.Color(51, 102, 255));
         btnEstudiante.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEstudiante.setForeground(new java.awt.Color(255, 255, 255));
-        btnEstudiante.setText("MESTRO");
+        btnEstudiante.setText("Estudiante/Maestro");
         btnEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEstudianteActionPerformed(evt);
@@ -54,7 +54,7 @@ public class Bienvenida extends javax.swing.JFrame {
         btnMestro.setBackground(new java.awt.Color(51, 102, 255));
         btnMestro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMestro.setForeground(new java.awt.Color(255, 255, 255));
-        btnMestro.setText("MESTRO");
+        btnMestro.setText("Administrador");
         btnMestro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMestroActionPerformed(evt);
@@ -76,7 +76,7 @@ public class Bienvenida extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMestroActionPerformed
 
     private void btnEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstudianteActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnEstudianteActionPerformed
 
     /**

@@ -3,7 +3,9 @@
      * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
      */
     package com.umg.proyect.model;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
     /**
      *
      * @author josth
