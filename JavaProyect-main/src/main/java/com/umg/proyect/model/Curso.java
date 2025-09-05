@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author josth
  */
 public class Curso {
-    private int curso_id;
+    private int id;
     private Teacher teacher_id;
     private String nombre;
     private String descripcion;
@@ -21,13 +21,15 @@ public class Curso {
     public Curso(){
     }
 
-    public int getCurso_id() {
-        return curso_id;
+    public int getId() {
+        return id;
     }
 
-    public void setCurso_id(int curso_id) {
-        this.curso_id = curso_id;
+    public void setId(int id) {
+        this.id = id;
     }
+
+
 
     public Teacher getTeacher_id() {
         return teacher_id;

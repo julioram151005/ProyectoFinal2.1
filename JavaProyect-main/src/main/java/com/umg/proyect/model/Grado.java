@@ -11,36 +11,37 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author josth
  */
 public class Grado {
-    private int grado_id;
-    private Curso curso_id;
-    private Student student_id;
+    private int id;
+    private Curso id_curso;
+    private Student id_student;
     private int nota;
     private String tipo;
+    
     public Grado(){
     }
 
-    public int getGrado_id() {
-        return grado_id;
+    public int getId() {
+        return id;
     }
 
-    public void setGrado_id(int grado_id) {
-        this.grado_id = grado_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Curso getCurso_id() {
-        return curso_id;
+    public Curso getId_curso() {
+        return id_curso;
     }
 
-    public void setCurso_id(Curso curso_id) {
-        this.curso_id = curso_id;
+    public void setId_curso(Curso id_curso) {
+        this.id_curso = id_curso;
     }
 
-    public Student getStudent_id() {
-        return student_id;
+    public Student getId_student() {
+        return id_student;
     }
 
-    public void setStudent_id(Student student_id) {
-        this.student_id = student_id;
+    public void setId_student(Student id_student) {
+        this.id_student = id_student;
     }
 
     public int getNota() {
@@ -58,5 +59,5 @@ public class Grado {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
+
 }
