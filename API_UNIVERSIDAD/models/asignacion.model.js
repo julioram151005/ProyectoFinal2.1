@@ -19,6 +19,12 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'id'
             }
         },
+        modalidad: {
+            type: Sequelize.STRING
+        },
+        horario: {
+            type: Sequelize.STRING
+        },
         });
     return Asignacion;
 }; 
