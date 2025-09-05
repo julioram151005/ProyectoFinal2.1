@@ -58,14 +58,13 @@ public class StudentService {
             }
         }
         return false;
-    }   
+    } 
+    
     public Student createStudent(Student m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPost request = new HttpPost(BASE_URL + "/create");
-
             String hashPass = PasswordEncryptor.hashMD5(m.getPassword());
             m.setPassword(hashPass);
-
             String json = mapper.writeValueAsString(m);
             request.setEntity(EntityBuilder.create()
                     .setText(json)
@@ -81,10 +80,8 @@ public class StudentService {
     public Student updateStudent(int id, Student m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPut request = new HttpPut(BASE_URL + "/update/" + id);
-
             String hashPass = PasswordEncryptor.hashMD5(m.getPassword());
             m.setPassword(hashPass);
-
             String json = mapper.writeValueAsString(m);
             request.setEntity(EntityBuilder.create()
                     .setText(json)

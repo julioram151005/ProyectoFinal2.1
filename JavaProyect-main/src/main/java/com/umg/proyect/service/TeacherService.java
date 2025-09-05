@@ -7,6 +7,7 @@ package com.umg.proyect.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.umg.proyect.model.Teacher;
+import com.umg.proyect.util.PasswordEncryptor;
 import java.io.InputStream;
 import java.util.List;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
@@ -35,9 +36,32 @@ public class TeacherService {
         }
     }
 
+    public boolean login(String correo, String contrasena) throws Exception {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpGet request = new HttpGet(BASE_URL);
+            ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
+
+            if (response.getCode() == 200) {
+                InputStream is = response.getEntity().getContent();
+                List<Teacher> docentes = mapper.readValue(is, new TypeReference<List<Teacher>>() {});
+
+                String hashIngresada = PasswordEncryptor.hashMD5(contrasena);
+
+                for (Teacher s : docentes) {
+                    if (s.getEmail().equalsIgnoreCase(correo) && s.getPassword().equals(hashIngresada)) {
+                        return true; 
+                    }
+                }
+            }
+        }
+        return false;
+    }     
+    
     public Teacher createTeacher(Teacher m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPost request = new HttpPost(BASE_URL + "/create");
+            String hashPass = PasswordEncryptor.hashMD5(m.getPassword());
+            m.setPassword(hashPass);
             String json = mapper.writeValueAsString(m);
             request.setEntity(EntityBuilder.create()
                     .setText(json)
@@ -52,6 +76,8 @@ public class TeacherService {
     public Teacher updateTeacher(int id, Teacher m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPut request = new HttpPut(BASE_URL + "/update/" + id);
+            String hashPass = PasswordEncryptor.hashMD5(m.getPassword());
+            m.setPassword(hashPass);
             String json = mapper.writeValueAsString(m);
             request.setEntity(EntityBuilder.create()
                     .setText(json)

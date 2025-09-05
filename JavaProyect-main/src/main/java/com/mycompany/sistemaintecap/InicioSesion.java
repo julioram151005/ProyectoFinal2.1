@@ -50,7 +50,6 @@ private final StudentService service = new StudentService();
         txtCarnet = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        btnMod = new javax.swing.JButton();
         lblimg2 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -92,8 +91,8 @@ private final StudentService service = new StudentService();
         pfondo.add(txtCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 200, 30));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Email");
-        pfondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        jLabel4.setText("Gmail");
+        pfondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 40, -1));
 
         btnBuscar.setBackground(new java.awt.Color(51, 51, 255));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,17 +102,7 @@ private final StudentService service = new StudentService();
                 btnBuscarActionPerformed(evt);
             }
         });
-        pfondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 280, -1));
-
-        btnMod.setBackground(new java.awt.Color(51, 51, 255));
-        btnMod.setForeground(new java.awt.Color(255, 255, 255));
-        btnMod.setText("Modificar");
-        btnMod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModActionPerformed(evt);
-            }
-        });
-        pfondo.add(btnMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 280, -1));
+        pfondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 280, -1));
         pfondo.add(lblimg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 370, 370));
 
         btnCrear.setBackground(new java.awt.Color(51, 51, 255));
@@ -125,11 +114,11 @@ private final StudentService service = new StudentService();
                 btnCrearActionPerformed(evt);
             }
         });
-        pfondo.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 280, -1));
+        pfondo.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, 280, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Password");
-        pfondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 50, 10));
+        jLabel6.setText("Contraseña");
+        pfondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 70, 20));
 
         txtContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,25 +150,33 @@ private final StudentService service = new StudentService();
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCarnetActionPerformed
 
-    private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModActionPerformed
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
     try {
         String correo = txtEmail.getText();
         String pass = txtContra.getText();
 
-        com.umg.proyect.service.StudentService loginService = new com.umg.proyect.service.StudentService();
+        int tipo = com.umg.proyect.util.UserRoleChecker.comprobarCorreo(correo);
 
-        if (loginService.login(correo, pass)) {
-            JOptionPane.showMessageDialog(this, " Login exitoso");
-            // Aquí puedes abrir tu ventana principal (ej: Bienvenida)
-            //Bienvenida bienvenida = new Bienvenida();
-            //bienvenida.setVisible(true);
-            //this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, " Correo o contraseña incorrectos");
+        switch (tipo) {
+            case com.umg.proyect.util.UserRoleChecker.STUDENT -> {
+                com.umg.proyect.service.StudentService studentService = new com.umg.proyect.service.StudentService();
+                if (studentService.login(correo, pass)) {
+                    JOptionPane.showMessageDialog(this, "Login exitoso como ESTUDIANTE");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Student)");
+                }
+            }
+
+            case com.umg.proyect.util.UserRoleChecker.TEACHER -> {
+                com.umg.proyect.service.TeacherService teacherService = new com.umg.proyect.service.TeacherService();
+                if (teacherService.login(correo, pass)) {
+                    JOptionPane.showMessageDialog(this, "Login exitoso como DOCENTE");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Teacher)");
+                }
+            }
+
+            default -> JOptionPane.showMessageDialog(this, "Dominio de correo no válido");
         }
 
     } catch (Exception ex) {
@@ -193,18 +190,39 @@ private final StudentService service = new StudentService();
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
     try {
-        Student m = new Student();
-        m.setNombre(jTextField1.getText());
-        m.setEmail(txtEmail.getText());
-        m.setPassword(txtContra.getText());
-        m.setCarnet(txtCarnet.getText());
+        String correo = txtEmail.getText();
+        String pass = txtContra.getText();
+        String nombre = jTextField1.getText();
 
-        service.createStudent(m); 
+        int tipo = com.umg.proyect.util.UserRoleChecker.comprobarCorreo(correo);
 
-        JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.");
+        switch (tipo) {
+            case com.umg.proyect.util.UserRoleChecker.STUDENT -> {
+                com.umg.proyect.model.Student s = new com.umg.proyect.model.Student();
+                s.setNombre(nombre);
+                s.setEmail(correo);
+                s.setPassword(pass);
+                s.setCarnet(txtCarnet.getText());
+                service.createStudent(s);
+                JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.");
+            }
+
+            case com.umg.proyect.util.UserRoleChecker.TEACHER -> {
+                com.umg.proyect.model.Teacher t = new com.umg.proyect.model.Teacher();
+                t.setNombre(nombre);
+                t.setEmail(correo);
+                t.setPassword(pass);
+                new com.umg.proyect.service.TeacherService().createTeacher(t);
+                JOptionPane.showMessageDialog(this, "Docente agregado correctamente.");
+            }
+
+            default -> JOptionPane.showMessageDialog(this, "Dominio de correo no válido, no se pudo registrar.");
+        }
+
         cleanFields();
+
     } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Error al agregar el estudiante: " + ex.getMessage());
+        JOptionPane.showMessageDialog(this, "Error al agregar usuario: " + ex.getMessage());
     }
     }//GEN-LAST:event_btnCrearActionPerformed
 
@@ -270,7 +288,6 @@ private final StudentService service = new StudentService();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnMod;
     private javax.swing.JButton btnRegreso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
