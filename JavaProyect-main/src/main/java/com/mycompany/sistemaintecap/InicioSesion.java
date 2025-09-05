@@ -47,17 +47,17 @@ private final StudentService service = new StudentService();
         jLabel2 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
         txtCarnet = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnMod = new javax.swing.JButton();
-        btnCrear = new javax.swing.JButton();
         lblimg2 = new javax.swing.JLabel();
+        btnCrear = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtContra = new javax.swing.JTextField();
-        lblfondo = new javax.swing.JLabel();
         btnRegreso = new javax.swing.JButton();
+        lblfondo = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -83,17 +83,6 @@ private final StudentService service = new StudentService();
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Carnet");
         pfondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
-
-        txtNombre.setEditable(false);
-        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
-        txtNombre.setForeground(new java.awt.Color(60, 63, 65));
-        txtNombre.setCaretColor(new java.awt.Color(0, 0, 102));
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
-        pfondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
 
         txtCarnet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +114,7 @@ private final StudentService service = new StudentService();
             }
         });
         pfondo.add(btnMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 280, -1));
+        pfondo.add(lblimg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 370, 370));
 
         btnCrear.setBackground(new java.awt.Color(51, 51, 255));
         btnCrear.setForeground(new java.awt.Color(255, 255, 255));
@@ -136,7 +126,6 @@ private final StudentService service = new StudentService();
             }
         });
         pfondo.add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 280, -1));
-        pfondo.add(lblimg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, 370, 370));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Password");
@@ -148,9 +137,6 @@ private final StudentService service = new StudentService();
             }
         });
         pfondo.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
-        pfondo.add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 470));
-
-        getContentPane().add(pfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 550));
 
         btnRegreso.setText("Regreso");
         btnRegreso.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +144,11 @@ private final StudentService service = new StudentService();
                 btnRegresoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, -1, -1));
+        pfondo.add(btnRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
+        pfondo.add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 760, 470));
+        pfondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
+
+        getContentPane().add(pfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,10 +156,6 @@ private final StudentService service = new StudentService();
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtCarnetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCarnetActionPerformed
         // TODO add your handling code here:
@@ -180,7 +166,25 @@ private final StudentService service = new StudentService();
     }//GEN-LAST:event_btnModActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-            // TODO add your handling code here:
+    try {
+        String correo = txtEmail.getText();
+        String pass = txtContra.getText();
+
+        com.umg.proyect.service.StudentService loginService = new com.umg.proyect.service.StudentService();
+
+        if (loginService.login(correo, pass)) {
+            JOptionPane.showMessageDialog(this, " Login exitoso");
+            // Aquí puedes abrir tu ventana principal (ej: Bienvenida)
+            //Bienvenida bienvenida = new Bienvenida();
+            //bienvenida.setVisible(true);
+            //this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, " Correo o contraseña incorrectos");
+        }
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "️ Error en login: " + ex.getMessage());
+    }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
@@ -190,7 +194,7 @@ private final StudentService service = new StudentService();
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
     try {
         Student m = new Student();
-        m.setNombre(txtNombre.getText());
+        m.setNombre(jTextField1.getText());
         m.setEmail(txtEmail.getText());
         m.setPassword(txtContra.getText());
         m.setCarnet(txtCarnet.getText());
@@ -214,7 +218,7 @@ private final StudentService service = new StudentService();
      */
 
         private void cleanFields(){
-        txtNombre.setText("");
+        jTextField1.setText("");
         txtEmail.setText("");
         txtContra.setText("");
         txtCarnet.setText("");
@@ -273,12 +277,12 @@ private final StudentService service = new StudentService();
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblfondo;
     private javax.swing.JLabel lblimg2;
     private javax.swing.JPanel pfondo;
     private javax.swing.JTextField txtCarnet;
     private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -22,7 +22,8 @@ import org.apache.hc.core5.http.ContentType;
  *
  * @author josth
  */
-public class GradoService {    private static final String BASE_URL = "https://proyectoprogramacion2-1.onrender.com/api/grados";
+public class GradoService {    
+    private static final String BASE_URL = "https://proyectoprogramacion2-1.onrender.com/api/grados";
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public List<Grado> getGrado() throws Exception {
