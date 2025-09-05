@@ -62,11 +62,12 @@ public class StudentService {
             return mapper.readValue(is, Student.class);
         }
     }
-
+/*
     public void deleteStudent(int id) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpDelete request = new HttpDelete(BASE_URL + "/delete/" + id);
             client.execute(request).close();
         }
     }
+*/
 }

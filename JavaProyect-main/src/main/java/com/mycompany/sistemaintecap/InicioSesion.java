@@ -14,6 +14,7 @@ import com.umg.proyect.service.StudentService;
 import javax.swing.*;
 
 public class InicioSesion extends javax.swing.JFrame {
+    private Bienvenida back;
 private final StudentService service = new StudentService();  
     public InicioSesion() {
         initComponents();
@@ -25,6 +26,10 @@ private final StudentService service = new StudentService();
     
     private ImageIcon imagen;
     private Icon icono;
+
+    public void setBack(Bienvenida back) {
+        this.back = back;
+    }
     
     
     /* 
@@ -52,6 +57,7 @@ private final StudentService service = new StudentService();
         jLabel6 = new javax.swing.JLabel();
         txtContra = new javax.swing.JTextField();
         lblfondo = new javax.swing.JLabel();
+        btnRegreso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -146,6 +152,14 @@ private final StudentService service = new StudentService();
 
         getContentPane().add(pfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 550));
 
+        btnRegreso.setText("Regreso");
+        btnRegreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,6 +203,11 @@ private final StudentService service = new StudentService();
         JOptionPane.showMessageDialog(this, "Error al agregar el estudiante: " + ex.getMessage());
     }
     }//GEN-LAST:event_btnCrearActionPerformed
+
+    private void btnRegresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresoActionPerformed
+        back.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnRegresoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,6 +267,7 @@ private final StudentService service = new StudentService();
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnMod;
+    private javax.swing.JButton btnRegreso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Bienvenida extends javax.swing.JFrame {
-
     /**
      * Creates new form Bienvenida
      */
@@ -72,11 +71,17 @@ public class Bienvenida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMestroActionPerformed
-        // TODO add your handling code here:
+        Maestros login2= new Maestros();
+        login2.setBack(this);
+        login2.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnMestroActionPerformed
 
     private void btnEstudianteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstudianteActionPerformed
-
+        InicioSesion login1= new InicioSesion();
+        login1.setBack(this);
+        login1.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnEstudianteActionPerformed
 
     /**

@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class Maestros extends javax.swing.JFrame {
-
+    private Bienvenida back;
     /**
      * Creates new form Maestros
      */
@@ -48,6 +48,7 @@ public class Maestros extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
         lblfondo = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -127,10 +128,22 @@ public class Maestros extends javax.swing.JFrame {
         jLabel6.setText("Password");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 50, 10));
         getContentPane().add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 320, 390));
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 480));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 480));
+
+        btnBack.setText("Regreso");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void setBack(Bienvenida back) {
+        this.back = back;
+    }
 
     private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
         // TODO add your handling code here:
@@ -155,6 +168,11 @@ public class Maestros extends javax.swing.JFrame {
     private void txtmail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmail1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtmail1ActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        back.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,6 +222,7 @@ public class Maestros extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnMod;
