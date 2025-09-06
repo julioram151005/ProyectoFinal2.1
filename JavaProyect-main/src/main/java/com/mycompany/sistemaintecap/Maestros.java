@@ -35,15 +35,9 @@ public class Maestros extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtnombre = new javax.swing.JTextField();
         txtmail1 = new javax.swing.JTextField();
         txtmail = new javax.swing.JTextField();
-        txtespecial = new javax.swing.JTextField();
-        btnCrear = new javax.swing.JButton();
-        btnMod = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
@@ -58,24 +52,9 @@ public class Maestros extends javax.swing.JFrame {
         jLabel1.setText("Administrador");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 190, -1));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nombre:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, -1));
-
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Email");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, 10));
-
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Especialidad");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
-
-        txtnombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnombreActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 200, 30));
 
         txtmail1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,32 +70,9 @@ public class Maestros extends javax.swing.JFrame {
         });
         getContentPane().add(txtmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 200, 30));
 
-        txtespecial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtespecialActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtespecial, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 200, 30));
-
-        btnCrear.setBackground(new java.awt.Color(51, 51, 255));
-        btnCrear.setForeground(new java.awt.Color(255, 255, 255));
-        btnCrear.setText("Crear");
-        btnCrear.setToolTipText("");
-        getContentPane().add(btnCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 280, -1));
-
-        btnMod.setBackground(new java.awt.Color(51, 51, 255));
-        btnMod.setForeground(new java.awt.Color(255, 255, 255));
-        btnMod.setText("Modificar");
-        btnMod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 280, -1));
-
         btnBuscar.setBackground(new java.awt.Color(51, 51, 255));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("Buscar");
+        btnBuscar.setText("Login");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -145,21 +101,9 @@ public class Maestros extends javax.swing.JFrame {
         this.back = back;
     }
 
-    private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtnombreActionPerformed
-
     private void txtmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtmailActionPerformed
-
-    private void txtespecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtespecialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtespecialActionPerformed
-
-    private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
@@ -224,18 +168,12 @@ public class Maestros extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCrear;
-    private javax.swing.JButton btnMod;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblfondo;
     private javax.swing.JLabel lblimg;
-    private javax.swing.JTextField txtespecial;
     private javax.swing.JTextField txtmail;
     private javax.swing.JTextField txtmail1;
-    private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
 }

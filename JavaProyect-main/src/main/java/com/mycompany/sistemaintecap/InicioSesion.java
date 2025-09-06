@@ -96,7 +96,7 @@ private final StudentService service = new StudentService();
 
         btnBuscar.setBackground(new java.awt.Color(51, 51, 255));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscar.setText("Buscar");
+        btnBuscar.setText("Login");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
