@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author josth
  */
 public class Teacher {
-    private int teacher_id;
+    private int id;
     private String nombre;
     private String email;
     private String password;
@@ -21,12 +21,12 @@ public class Teacher {
     public Teacher(){
     }
 
-    public int getTeacher_id() {
-        return teacher_id;
+    public int getId() {
+        return id;
     }
 
-    public void setTeacher_id(int teacher_id) {
-        this.teacher_id = teacher_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

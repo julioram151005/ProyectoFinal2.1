@@ -85,8 +85,8 @@ public class InicioSesion extends javax.swing.JFrame {
         pfondo.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 200, 30));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Carnet");
-        pfondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+        jLabel3.setText("Carnet / Especialidad");
+        pfondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 120, 40));
 
         txtCarnet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,6 +226,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 t.setNombre(nombre);
                 t.setEmail(correo);
                 t.setPassword(pass);
+                t.setEspecialidad(nombre);
 
                 service2.createTeacher(t);
                 JOptionPane.showMessageDialog(this, "Docente agregado correctamente.");
