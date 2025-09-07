@@ -19,6 +19,9 @@ module.exports = (sequelize, Sequelize) => {
                 key: 'id'
             }
         },
+        especialidad: {
+            type: Sequelize.STRING
+        },
         modalidad: {
             type: Sequelize.STRING
         },
