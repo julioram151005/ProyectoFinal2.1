@@ -40,5 +40,5 @@ public class Asignacion {
     public void setCurso_id(Curso curso_id) {
         this.curso_id = curso_id;
     }
-     
+    
 }

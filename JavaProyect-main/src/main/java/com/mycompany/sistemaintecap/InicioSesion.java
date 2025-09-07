@@ -8,14 +8,15 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import com.umg.proyect.model.Student;
 import com.umg.proyect.service.StudentService;
+import com.umg.proyect.service.TeacherService;
 
 import javax.swing.*;
 
 public class InicioSesion extends javax.swing.JFrame {
     private Bienvenida back;
-    private final StudentService service = new StudentService();
+    private final StudentService service1 = new StudentService();
+    private final TeacherService service2 = new TeacherService();    
     boolean showPassword = false;
     public InicioSesion() {
         initComponents();
@@ -32,6 +33,7 @@ public class InicioSesion extends javax.swing.JFrame {
     public void setBack(Bienvenida back) {
         this.back = back;
     }
+    
     
     
     /* 
@@ -158,7 +160,8 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCarnetActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-    try {
+
+        try {
         String correo = txtEmail.getText();
         String pass = new String(passClave.getPassword());
 
@@ -166,18 +169,24 @@ public class InicioSesion extends javax.swing.JFrame {
 
         switch (tipo) {
             case com.umg.proyect.util.UserRoleChecker.STUDENT -> {
-                com.umg.proyect.service.StudentService studentService = new com.umg.proyect.service.StudentService();
-                if (studentService.login(correo, pass)) {
+                if (service1.login(correo, pass)) {
                     JOptionPane.showMessageDialog(this, "Login exitoso como ESTUDIANTE");
+                    Asignacion asig= new Asignacion();
+                    asig.setBack(this);
+                    asig.setVisible(true);
+                    this.setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Student)");
                 }
             }
 
             case com.umg.proyect.util.UserRoleChecker.TEACHER -> {
-                com.umg.proyect.service.TeacherService teacherService = new com.umg.proyect.service.TeacherService();
-                if (teacherService.login(correo, pass)) {
+                if (service2.login(correo, pass)) {
                     JOptionPane.showMessageDialog(this, "Login exitoso como DOCENTE");
+                    Cursos cur= new Cursos();    
+                    cur.setBack(this);
+                    cur.setVisible(true);
+                    this.setVisible(false);   
                 } else {
                     JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Teacher)");
                 }
@@ -196,6 +205,8 @@ public class InicioSesion extends javax.swing.JFrame {
         String correo = txtEmail.getText();
         String pass = new String(passClave.getPassword());
         String nombre = jTextField1.getText();
+        String carnet = txtCarnet.getText();
+
 
         int tipo = com.umg.proyect.util.UserRoleChecker.comprobarCorreo(correo);
 
@@ -205,27 +216,28 @@ public class InicioSesion extends javax.swing.JFrame {
                 s.setNombre(nombre);
                 s.setEmail(correo);
                 s.setPassword(pass);
-                s.setCarnet(txtCarnet.getText());
-                service.createStudent(s);
+                s.setCarnet(carnet);
+
+                service1.createStudent(s);
                 JOptionPane.showMessageDialog(this, "Estudiante agregado correctamente.");
             }
-
             case com.umg.proyect.util.UserRoleChecker.TEACHER -> {
                 com.umg.proyect.model.Teacher t = new com.umg.proyect.model.Teacher();
                 t.setNombre(nombre);
                 t.setEmail(correo);
                 t.setPassword(pass);
-                new com.umg.proyect.service.TeacherService().createTeacher(t);
+
+                service2.createTeacher(t);
                 JOptionPane.showMessageDialog(this, "Docente agregado correctamente.");
             }
-
-            default -> JOptionPane.showMessageDialog(this, "Dominio de correo no válido, no se pudo registrar.");
+            default -> {
+                JOptionPane.showMessageDialog(this, "  Dominio de correo no válido, no se pudo registrar.");
+            }
         }
 
         cleanFields();
-
     } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Error al agregar usuario: " + ex.getMessage());
+        JOptionPane.showMessageDialog(this, "❌ Error al agregar usuario: " + ex.getMessage());
     }
     }//GEN-LAST:event_btnCrearActionPerformed
 

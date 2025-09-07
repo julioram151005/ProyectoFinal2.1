@@ -7,10 +7,11 @@ package com.mycompany.sistemaintecap;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Cursos extends javax.swing.JFrame {
-
+    private Bienvenida back;
 
     public Cursos() {
         initComponents();
@@ -24,7 +25,9 @@ public class Cursos extends javax.swing.JFrame {
         this.Imagen(this.lbllogo, "src/main/java/img/logo.png");
         
     }
-    
+    public void setBack(JFrame back) {
+        this.back = (Bienvenida) back;
+    }    
     private ImageIcon imagen;
     private Icon icono;
 
@@ -47,6 +50,7 @@ public class Cursos extends javax.swing.JFrame {
         lblidioma = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbllogo = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -105,6 +109,14 @@ public class Cursos extends javax.swing.JFrame {
         jLabel2.setText("CURSOS");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 490, 110));
         getContentPane().add(lbllogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 170, 60));
+
+        btnBack.setText("Regreso");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 490));
 
         pack();
@@ -125,6 +137,11 @@ public class Cursos extends javax.swing.JFrame {
     private void btntecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntecActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btntecActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        back.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +191,7 @@ public class Cursos extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnMusica;
     private javax.swing.JButton btnPintura;
     private javax.swing.JButton btnidioma;

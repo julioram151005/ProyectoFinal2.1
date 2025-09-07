@@ -111,7 +111,7 @@ public class Maestros extends javax.swing.JFrame {
             }
         });
         getContentPane().add(lblMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 790, 470));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 790, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -133,11 +133,11 @@ public class Maestros extends javax.swing.JFrame {
 
         switch (tipo) {
             case com.umg.proyect.util.UserRoleChecker.ADMIN -> {
-                com.umg.proyect.service.StudentService studentService = new com.umg.proyect.service.StudentService();
-                if (studentService.login(correo, pass)) {
+                com.umg.proyect.service.AdminService adminService = new com.umg.proyect.service.AdminService();
+                if (adminService.login(correo, pass)) {
                     JOptionPane.showMessageDialog(this, "Login exitoso como Administrador");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Student)");
+                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Admin)");
                 }
             }
             default -> JOptionPane.showMessageDialog(this, "Correo Invalido");

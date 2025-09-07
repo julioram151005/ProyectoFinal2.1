@@ -7,10 +7,11 @@ package com.mycompany.sistemaintecap;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Asignacion extends javax.swing.JFrame {
-
+    private Bienvenida back;
     /**
      * Creates new form Asignacion
      */
@@ -21,7 +22,9 @@ public class Asignacion extends javax.swing.JFrame {
         this.Imagen(this.lbllogo, "src/main/java/img/logo.png");
         this.Imagen(this.lblimg, "src/main/java/img/chico.png");
     }
-    
+    public void setBack(JFrame back) {
+        this.back = (Bienvenida) back;
+    }
     private ImageIcon imagen;
     private Icon icono;
 
@@ -46,6 +49,7 @@ public class Asignacion extends javax.swing.JFrame {
         lblmodalidad = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,10 +101,23 @@ public class Asignacion extends javax.swing.JFrame {
         jLabel7.setText("Modalidad");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
         getContentPane().add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 340, 380));
+
+        btnBack.setText("Regreso");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        back.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,6 +166,7 @@ public class Asignacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
