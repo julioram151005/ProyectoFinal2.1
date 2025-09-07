@@ -3,10 +3,9 @@ const Curso = db.cursos;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-
     if (!req.body.nombre) {
         res.status(400).send({
-            message: "El nombre no puede estar vacio!"
+            message: "El nombre no puede estar vacío!"
         });
         return;
     }
@@ -19,15 +18,13 @@ exports.create = (req, res) => {
         id_teacher: req.body.id_teacher  
     };
 
-
     Curso.create(cursos)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "Error al crear el curso."
+                message: err.message || "Error al crear el curso."
             });
         });
 };
@@ -38,7 +35,7 @@ exports.findAll = (req, res) => {
 
     Curso.findAll({
         where: condition,
-        include: [{ model: Teacher }] 
+        include: [{ model: db.teachers }] 
     })
         .then(data => res.send(data))
         .catch(err => {
@@ -52,7 +49,7 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
 
     Curso.findByPk(id, {
-        include: [{ model: Teacher }] 
+        include: [{ model: db.teachers }] 
     })
         .then(data => res.send(data))
         .catch(err => {
@@ -61,6 +58,7 @@ exports.findOne = (req, res) => {
             });
         });
 };
+
 
 exports.update = (req, res) => {
     const id = req.params.id;

@@ -6,5 +6,5 @@ module.exports = app => {
     router.get("/:id", asignacionController.findOne);
     router.put("/update/:id", asignacionController.update);
     router.delete("/delete/:id", asignacionController.delete);
-    app.use("/api/asginacion", router);
-}; 
+    app.use("/api/asignacion", router);
+};

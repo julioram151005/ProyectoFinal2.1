@@ -4,7 +4,8 @@
   const app = express();
 
   const corsOptions = {
-    origin: "*"
+    origin: "http://localhost:8081"  
+    //origin: "*"
   };
 
   
