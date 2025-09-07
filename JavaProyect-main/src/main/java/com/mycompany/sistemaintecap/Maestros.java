@@ -4,13 +4,16 @@
  */
 package com.mycompany.sistemaintecap;
 
+import static com.umg.proyect.util.UserRoleChecker.ADMIN;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Maestros extends javax.swing.JFrame {
     private Bienvenida back;
+    boolean showPassword = false;    
     /**
      * Creates new form Maestros
      */
@@ -36,13 +39,14 @@ public class Maestros extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtmail1 = new javax.swing.JTextField();
-        txtmail = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
-        lblfondo = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        passClave = new javax.swing.JPasswordField();
+        lblMostrar = new javax.swing.JLabel();
+        lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -56,19 +60,12 @@ public class Maestros extends javax.swing.JFrame {
         jLabel4.setText("Email");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, 10));
 
-        txtmail1.addActionListener(new java.awt.event.ActionListener() {
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmail1ActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
-        getContentPane().add(txtmail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 200, 30));
-
-        txtmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmailActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 200, 30));
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 200, 30));
 
         btnBuscar.setBackground(new java.awt.Color(51, 51, 255));
         btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -84,7 +81,6 @@ public class Maestros extends javax.swing.JFrame {
         jLabel6.setText("Password");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 50, 10));
         getContentPane().add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 320, 390));
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 480));
 
         btnBack.setText("Regreso");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +88,30 @@ public class Maestros extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 50, -1, -1));
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 50, -1, -1));
+
+        passClave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passClaveMouseClicked(evt);
+            }
+        });
+        passClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passClaveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(passClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 200, 30));
+
+        lblMostrar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        lblMostrar.setForeground(new java.awt.Color(255, 255, 51));
+        lblMostrar.setText("Mostrar");
+        lblMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMostrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(lblMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 790, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -101,22 +120,64 @@ public class Maestros extends javax.swing.JFrame {
         this.back = back;
     }
 
-    private void txtmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmailActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtmailActionPerformed
+    }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    try {
+        String correo = txtEmail.getText();
+        String pass = new String(passClave.getPassword());
 
-    private void txtmail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmail1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtmail1ActionPerformed
+        int tipo = com.umg.proyect.util.UserRoleChecker.comprobarCorreo(correo);
+
+        switch (tipo) {
+            case com.umg.proyect.util.UserRoleChecker.ADMIN -> {
+                com.umg.proyect.service.StudentService studentService = new com.umg.proyect.service.StudentService();
+                if (studentService.login(correo, pass)) {
+                    JOptionPane.showMessageDialog(this, "Login exitoso como Administrador");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Student)");
+                }
+            }
+            default -> JOptionPane.showMessageDialog(this, "Correo Invalido");
+        }
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "️ Error en login: " + ex.getMessage());
+    }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         back.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void passClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passClaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passClaveActionPerformed
+
+    private void passClaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passClaveMouseClicked
+        if (showPassword) {
+            passClave.setEchoChar('\u2022'); 
+            lblMostrar.setText("Mostrar");
+        } else {
+            passClave.setEchoChar((char) 0);
+            lblMostrar.setText("Ocultar");
+        }
+        showPassword = !showPassword;
+    }//GEN-LAST:event_passClaveMouseClicked
+
+    private void lblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMostrarMouseClicked
+        if (showPassword) {
+            passClave.setEchoChar('\u2022');
+            lblMostrar.setText("Mostrar");
+        } else {
+            passClave.setEchoChar((char) 0);
+            lblMostrar.setText("Ocultar");
+        }
+        showPassword = !showPassword;
+    }//GEN-LAST:event_lblMostrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -171,9 +232,10 @@ public class Maestros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblMostrar;
     private javax.swing.JLabel lblfondo;
     private javax.swing.JLabel lblimg;
-    private javax.swing.JTextField txtmail;
-    private javax.swing.JTextField txtmail1;
+    private javax.swing.JPasswordField passClave;
+    private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
 }

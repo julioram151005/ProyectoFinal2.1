@@ -15,13 +15,15 @@ import javax.swing.*;
 
 public class InicioSesion extends javax.swing.JFrame {
     private Bienvenida back;
-private final StudentService service = new StudentService();  
+    private final StudentService service = new StudentService();
+    boolean showPassword = false;
     public InicioSesion() {
         initComponents();
         
         this.setLocationRelativeTo(this);
         this.Imagen(this.lblfondo, "src/main/java/img/fondo.png");
         this.Imagen(this.lblimg2, "src/main/java/img/chica.png");
+        passClave.setEchoChar('\u2022');
     }
     
     private ImageIcon imagen;
@@ -53,10 +55,11 @@ private final StudentService service = new StudentService();
         lblimg2 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtContra = new javax.swing.JTextField();
-        btnRegreso = new javax.swing.JButton();
-        lblfondo = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        btnRegreso = new javax.swing.JButton();
+        lblMostrar = new javax.swing.JLabel();
+        passClave = new javax.swing.JPasswordField();
+        lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,7 +106,7 @@ private final StudentService service = new StudentService();
             }
         });
         pfondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 280, -1));
-        pfondo.add(lblimg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 370, 370));
+        pfondo.add(lblimg2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 370, 370));
 
         btnCrear.setBackground(new java.awt.Color(51, 51, 255));
         btnCrear.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,13 +122,7 @@ private final StudentService service = new StudentService();
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Contraseña");
         pfondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 70, 20));
-
-        txtContra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraActionPerformed(evt);
-            }
-        });
-        pfondo.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
+        pfondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
 
         btnRegreso.setText("Regreso");
         btnRegreso.addActionListener(new java.awt.event.ActionListener() {
@@ -134,10 +131,20 @@ private final StudentService service = new StudentService();
             }
         });
         pfondo.add(btnRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, -1, -1));
-        pfondo.add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 760, 470));
-        pfondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
 
-        getContentPane().add(pfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 550));
+        lblMostrar.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        lblMostrar.setForeground(new java.awt.Color(255, 255, 51));
+        lblMostrar.setText("Mostrar");
+        lblMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblMostrarMouseClicked(evt);
+            }
+        });
+        pfondo.add(lblMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, -1, -1));
+        pfondo.add(passClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 200, 30));
+        pfondo.add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 790, 520));
+
+        getContentPane().add(pfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -153,7 +160,7 @@ private final StudentService service = new StudentService();
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
     try {
         String correo = txtEmail.getText();
-        String pass = txtContra.getText();
+        String pass = new String(passClave.getPassword());
 
         int tipo = com.umg.proyect.util.UserRoleChecker.comprobarCorreo(correo);
 
@@ -176,7 +183,7 @@ private final StudentService service = new StudentService();
                 }
             }
 
-            default -> JOptionPane.showMessageDialog(this, "Dominio de correo no válido");
+            default -> JOptionPane.showMessageDialog(this, "Correo Invalido");
         }
 
     } catch (Exception ex) {
@@ -184,14 +191,10 @@ private final StudentService service = new StudentService();
     }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void txtContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraActionPerformed
-
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
     try {
         String correo = txtEmail.getText();
-        String pass = txtContra.getText();
+        String pass = new String(passClave.getPassword());
         String nombre = jTextField1.getText();
 
         int tipo = com.umg.proyect.util.UserRoleChecker.comprobarCorreo(correo);
@@ -231,6 +234,17 @@ private final StudentService service = new StudentService();
         this.setVisible(false);
     }//GEN-LAST:event_btnRegresoActionPerformed
 
+    private void lblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMostrarMouseClicked
+        if (showPassword) {
+            passClave.setEchoChar('\u2022'); 
+            lblMostrar.setText("Mostrar");
+        } else {
+            passClave.setEchoChar((char) 0);
+            lblMostrar.setText("Ocultar");
+        }
+        showPassword = !showPassword;
+    }//GEN-LAST:event_lblMostrarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -238,7 +252,7 @@ private final StudentService service = new StudentService();
         private void cleanFields(){
         jTextField1.setText("");
         txtEmail.setText("");
-        txtContra.setText("");
+        passClave.setText("");
         txtCarnet.setText("");
     }    
     public static void main(String args[]) {
@@ -295,11 +309,12 @@ private final StudentService service = new StudentService();
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblMostrar;
     private javax.swing.JLabel lblfondo;
     private javax.swing.JLabel lblimg2;
+    private javax.swing.JPasswordField passClave;
     private javax.swing.JPanel pfondo;
     private javax.swing.JTextField txtCarnet;
-    private javax.swing.JTextField txtContra;
     private javax.swing.JTextField txtEmail;
     // End of variables declaration//GEN-END:variables
 }
