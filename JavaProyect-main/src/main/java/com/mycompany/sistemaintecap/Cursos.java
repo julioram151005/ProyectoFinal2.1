@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Cursos extends javax.swing.JFrame {
-    private Bienvenida back;
+    private InicioSesion back;
 
     public Cursos() {
         initComponents();
@@ -25,9 +25,9 @@ public class Cursos extends javax.swing.JFrame {
         this.Imagen(this.lbllogo, "src/main/java/img/logo.png");
         
     }
-    public void setBack(JFrame back) {
-        this.back = (Bienvenida) back;
-    }    
+    public void setBack(InicioSesion back) {
+        this.back = back;
+    } 
     private ImageIcon imagen;
     private Icon icono;
 

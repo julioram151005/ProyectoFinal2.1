@@ -38,27 +38,26 @@ public class StudentService {
         }
     }
 
-    public boolean login(String correo, String contrasena) throws Exception {
-        try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet(BASE_URL);
-            ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
+public Student login(String correo, String contrasena) throws Exception {
+    try (CloseableHttpClient client = HttpClients.createDefault()) {
+        HttpGet request = new HttpGet(BASE_URL);
+        ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
 
-            if (response.getCode() == 200) {
-                InputStream is = response.getEntity().getContent();
-                List<Student> estudiantes = mapper.readValue(is, new TypeReference<List<Student>>() {});
+        if (response.getCode() == 200) {
+            InputStream is = response.getEntity().getContent();
+            List<Student> estudiantes = mapper.readValue(is, new TypeReference<List<Student>>() {});
 
-                String hashIngresada = PasswordEncryptor.hashMD5(contrasena);
+            String hashIngresada = PasswordEncryptor.hashMD5(contrasena);
 
-
-                for (Student s : estudiantes) {
-                    if (s.getEmail().equalsIgnoreCase(correo) && s.getPassword().equals(hashIngresada)) {
-                        return true; 
-                    }
+            for (Student s : estudiantes) {
+                if (s.getEmail().equalsIgnoreCase(correo) && s.getPassword().equals(hashIngresada)) {
+                    return s; // Retorna el objeto Student completo
                 }
             }
         }
-        return false;
-    } 
+    }
+    return null; // Retorna null si no encuentra
+}
     
     public Student createStudent(Student m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {

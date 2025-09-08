@@ -36,26 +36,26 @@ public class TeacherService {
         }
     }
 
-    public boolean login(String correo, String contrasena) throws Exception {
+    public Teacher login(String correo, String contrasena) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(BASE_URL);
             ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
 
             if (response.getCode() == 200) {
                 InputStream is = response.getEntity().getContent();
-                List<Teacher> docentes = mapper.readValue(is, new TypeReference<List<Teacher>>() {});
+                List<Teacher> teachers = mapper.readValue(is, new TypeReference<List<Teacher>>() {});
 
                 String hashIngresada = PasswordEncryptor.hashMD5(contrasena);
 
-                for (Teacher s : docentes) {
-                    if (s.getEmail().equalsIgnoreCase(correo) && s.getPassword().equals(hashIngresada)) {
-                        return true; 
+                for (Teacher t : teachers) {
+                    if (t.getEmail().equalsIgnoreCase(correo) && t.getPassword().equals(hashIngresada)) {
+                        return t; // Retorna el objeto Teacher completo
                     }
                 }
             }
         }
-        return false;
-    }     
+        return null;
+    }
     
     public Teacher createTeacher(Teacher m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {

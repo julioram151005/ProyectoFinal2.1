@@ -26,7 +26,7 @@ public class CursoService {
     private static final String BASE_URL = "https://proyectoprogramacion2-1.onrender.com/api/cursos";
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public List<Curso> getCurso() throws Exception {
+    public List<Curso> getCursos() throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(BASE_URL);
             ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
@@ -48,7 +48,15 @@ public class CursoService {
             return mapper.readValue(is, Curso.class);
         }
     }
-
+    public int obtenerIdCursoPorNombre(String nombreCurso) throws Exception {
+        List<Curso> cursos = getCursos();
+        for (Curso curso : cursos) {
+            if (curso.getNombre().equalsIgnoreCase(nombreCurso)) {
+                return curso.getId();
+            }
+        }
+        return -1; // Retorna -1 si no encuentra
+    }
     public Curso updateCurso(int id, Curso m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPut request = new HttpPut(BASE_URL + "/update/" + id);

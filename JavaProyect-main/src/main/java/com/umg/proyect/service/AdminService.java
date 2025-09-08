@@ -61,6 +61,8 @@ public class AdminService {
     public Admin createAdmin(Admin m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPost request = new HttpPost(BASE_URL + "/create");
+            String hashPass = PasswordEncryptor.hashMD5(m.getPassword());
+            m.setPassword(hashPass);            
             String json = mapper.writeValueAsString(m);
             request.setEntity(EntityBuilder.create()
                     .setText(json)

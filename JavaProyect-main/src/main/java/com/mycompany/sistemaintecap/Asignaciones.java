@@ -4,26 +4,28 @@
  */
 package com.mycompany.sistemaintecap;
 
+import com.umg.proyect.model.Student;
+import com.umg.proyect.util.SessionManager;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Asignacion extends javax.swing.JFrame {
-    private Bienvenida back;
+public class Asignaciones extends javax.swing.JFrame {
+    private InicioSesion back;
     /**
      * Creates new form Asignacion
      */
-    public Asignacion() {
+    public Asignaciones() {
         initComponents();
         this.setLocationRelativeTo(this);
         this.Imagen(this.lblfondo, "src/main/java/img/f.png");
         this.Imagen(this.lbllogo, "src/main/java/img/logo.png");
         this.Imagen(this.lblimg, "src/main/java/img/chico.png");
+        cargarDatosUsuario();
     }
-    public void setBack(JFrame back) {
-        this.back = (Bienvenida) back;
+    public void setBack(InicioSesion back) {
+        this.back = back;
     }
     private ImageIcon imagen;
     private Icon icono;
@@ -42,14 +44,17 @@ public class Asignacion extends javax.swing.JFrame {
         lblhorario = new javax.swing.JLabel();
         lblnombre = new javax.swing.JLabel();
         lblcurso = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         lblespecialidad = new javax.swing.JLabel();
         lblmodalidad = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        btnIdioma = new javax.swing.JButton();
+        btnPintura = new javax.swing.JButton();
+        btnMusica = new javax.swing.JButton();
+        btnTecnologia = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
+        lblCarnet = new javax.swing.JLabel();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,26 +72,16 @@ public class Asignacion extends javax.swing.JFrame {
 
         lblnombre.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         lblnombre.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 320, 30));
+        getContentPane().add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 320, 30));
 
         lblcurso.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
         lblcurso.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(lblcurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 350, 30));
 
-        jLabel4.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Horario");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, -1, -1));
-
         jLabel5.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Al curso de");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
-
-        jLabel6.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Especialidad");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, -1, -1));
+        jLabel5.setText("Selecciona el Curso al que te deseas asignar");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
 
         lblespecialidad.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         lblespecialidad.setForeground(new java.awt.Color(255, 255, 255));
@@ -95,11 +90,6 @@ public class Asignacion extends javax.swing.JFrame {
         lblmodalidad.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         lblmodalidad.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(lblmodalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 190, 30));
-
-        jLabel7.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Modalidad");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, -1, -1));
         getContentPane().add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 340, 380));
 
         btnBack.setText("Regreso");
@@ -109,6 +99,46 @@ public class Asignacion extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
+
+        btnIdioma.setText("Idiomas");
+        btnIdioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIdiomaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnIdioma, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 150, 90));
+
+        btnPintura.setText("Pintura");
+        btnPintura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPinturaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPintura, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 140, 80));
+
+        btnMusica.setText("Musica");
+        btnMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMusicaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMusica, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 330, 150, 80));
+
+        btnTecnologia.setText("Tecnologia");
+        btnTecnologia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTecnologiaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTecnologia, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 150, 80));
+
+        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre.setText("****");
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 210, -1));
+
+        lblCarnet.setForeground(new java.awt.Color(255, 255, 255));
+        lblCarnet.setText("****");
+        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 220, -1));
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 490));
 
         pack();
@@ -119,6 +149,41 @@ public class Asignacion extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnPinturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinturaActionPerformed
+        CPintura idio= new CPintura();
+        idio.setBack(this);
+        idio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPinturaActionPerformed
+
+    private void btnIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdiomaActionPerformed
+        CIdiomas idio= new CIdiomas();
+        idio.setBack(this);
+        idio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnIdiomaActionPerformed
+
+    private void btnMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicaActionPerformed
+        CMusica idio= new CMusica();
+        idio.setBack(this);
+        idio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnMusicaActionPerformed
+
+    private void btnTecnologiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTecnologiaActionPerformed
+        CTec idio= new CTec();
+        idio.setBack(this);
+        idio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTecnologiaActionPerformed
+
+private void cargarDatosUsuario() {
+    if (SessionManager.getUserType().equals("STUDENT")) {
+        Student student = SessionManager.getCurrentStudent();
+        lblNombre.setText("Estudiante: " + student.getNombre());
+        lblCarnet.setText("Carnet: " + student.getCarnet());
+    }
+}    
     /**
      * @param args the command line arguments
      */
@@ -136,20 +201,21 @@ public class Asignacion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Asignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asignaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Asignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asignaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Asignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asignaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Asignacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asignaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Asignacion().setVisible(true);
+                new Asignaciones().setVisible(true);
             }
         });
     }
@@ -167,11 +233,14 @@ public class Asignacion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnIdioma;
+    private javax.swing.JButton btnMusica;
+    private javax.swing.JButton btnPintura;
+    private javax.swing.JButton btnTecnologia;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblCarnet;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblcurso;
     private javax.swing.JLabel lblespecialidad;
     private javax.swing.JLabel lblfondo;

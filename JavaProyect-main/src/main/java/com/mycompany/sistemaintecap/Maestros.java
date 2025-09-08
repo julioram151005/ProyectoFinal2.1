@@ -4,7 +4,7 @@
  */
 package com.mycompany.sistemaintecap;
 
-import static com.umg.proyect.util.UserRoleChecker.ADMIN;
+import com.umg.proyect.service.AdminService;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -13,7 +13,8 @@ import javax.swing.JOptionPane;
 
 public class Maestros extends javax.swing.JFrame {
     private Bienvenida back;
-    boolean showPassword = false;    
+    boolean showPassword = false;   
+    private final AdminService service1 = new AdminService();    
     /**
      * Creates new form Maestros
      */

@@ -11,34 +11,63 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author josth
  */
 public class Asignacion {
-    private int asigned_id;
-    private Student student_id;
-    private Curso curso_id;
+    private int id;
+    private int id_student;
+    private int id_curse;
+    private String especialidad;
+    private String modalidad;
+    private String horario;
+    
     public Asignacion(){
     } 
 
-    public int getAsigned_id() {
-        return asigned_id;
+    public int getId() {
+        return id;
     }
 
-    public void setAsigned_id(int asigned_id) {
-        this.asigned_id = asigned_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Student getStudent_id() {
-        return student_id;
+    public int getId_student() {
+        return id_student;
     }
 
-    public void setStudent_id(Student student_id) {
-        this.student_id = student_id;
+    public void setId_student(int id_student) {
+        this.id_student = id_student;
     }
 
-    public Curso getCurso_id() {
-        return curso_id;
+    public int getId_curse() {
+        return id_curse;
     }
 
-    public void setCurso_id(Curso curso_id) {
-        this.curso_id = curso_id;
+    public void setId_curse(int id_curse) {
+        this.id_curse = id_curse;
     }
-    
+
+
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public String getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
 }

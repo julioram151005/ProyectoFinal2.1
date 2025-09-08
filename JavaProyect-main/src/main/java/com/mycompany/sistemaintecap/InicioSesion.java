@@ -4,12 +4,15 @@ package com.mycompany.sistemaintecap;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import com.umg.proyect.model.Student;
+import com.umg.proyect.model.Teacher;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import com.umg.proyect.service.StudentService;
 import com.umg.proyect.service.TeacherService;
+import com.umg.proyect.util.SessionManager;
 
 import javax.swing.*;
 
@@ -57,7 +60,7 @@ public class InicioSesion extends javax.swing.JFrame {
         lblimg2 = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         btnRegreso = new javax.swing.JButton();
         lblMostrar = new javax.swing.JLabel();
         passClave = new javax.swing.JPasswordField();
@@ -124,7 +127,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Contraseña");
         pfondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 70, 20));
-        pfondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
+        pfondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 200, 30));
 
         btnRegreso.setText("Regreso");
         btnRegreso.addActionListener(new java.awt.event.ActionListener() {
@@ -160,51 +163,53 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCarnetActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        try {
+    try {
         String correo = txtEmail.getText();
         String pass = new String(passClave.getPassword());
-
         int tipo = com.umg.proyect.util.UserRoleChecker.comprobarCorreo(correo);
-
+        
         switch (tipo) {
             case com.umg.proyect.util.UserRoleChecker.STUDENT -> {
-                if (service1.login(correo, pass)) {
+                Student student = service1.login(correo, pass);
+                if (student != null) {
+                    SessionManager.setStudentSession(student); 
                     JOptionPane.showMessageDialog(this, "Login exitoso como ESTUDIANTE");
-                    Asignacion asig= new Asignacion();
+                    
+                    Asignaciones asig = new Asignaciones();
                     asig.setBack(this);
                     asig.setVisible(true);
                     this.setVisible(false);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Student)");
+                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos");
                 }
             }
-
             case com.umg.proyect.util.UserRoleChecker.TEACHER -> {
-                if (service2.login(correo, pass)) {
+                Teacher teacher = service2.login(correo, pass);
+                if (teacher != null) {
+                    SessionManager.setTeacherSession(teacher);
                     JOptionPane.showMessageDialog(this, "Login exitoso como DOCENTE");
-                    Cursos cur= new Cursos();    
+                    
+                    Cursos cur = new Cursos();    
                     cur.setBack(this);
                     cur.setVisible(true);
                     this.setVisible(false);   
                 } else {
-                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Teacher)");
+                    JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos");
                 }
             }
-
             default -> JOptionPane.showMessageDialog(this, "Correo Invalido");
         }
-
     } catch (Exception ex) {
         JOptionPane.showMessageDialog(this, "️ Error en login: " + ex.getMessage());
     }
+    cleanFields();   
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
     try {
         String correo = txtEmail.getText();
         String pass = new String(passClave.getPassword());
-        String nombre = jTextField1.getText();
+        String nombre = txtNombre.getText();
         String carnet = txtCarnet.getText();
 
 
@@ -263,7 +268,7 @@ public class InicioSesion extends javax.swing.JFrame {
      */
 
         private void cleanFields(){
-        jTextField1.setText("");
+        txtNombre.setText("");
         txtEmail.setText("");
         passClave.setText("");
         txtCarnet.setText("");
@@ -321,7 +326,6 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblMostrar;
     private javax.swing.JLabel lblfondo;
     private javax.swing.JLabel lblimg2;
@@ -329,5 +333,6 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JPanel pfondo;
     private javax.swing.JTextField txtCarnet;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

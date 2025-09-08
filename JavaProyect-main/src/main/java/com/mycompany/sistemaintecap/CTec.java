@@ -4,13 +4,21 @@
  */
 package com.mycompany.sistemaintecap;
 
+import com.umg.proyect.model.Asignacion;
+import com.umg.proyect.model.Student;
+import com.umg.proyect.service.AsignacionService;
+import com.umg.proyect.service.CursoService;
+import com.umg.proyect.util.SessionManager;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class CTec extends javax.swing.JFrame {
-
+    private Asignaciones back;
+    private final AsignacionService asignacionService;
+    private final CursoService cursoService;        
     /**
      * Creates new form CTec
      */
@@ -18,11 +26,16 @@ public class CTec extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         this.Imagen(this.lblfondo, "src/main/java/img/ct.png");
+        this.asignacionService = new AsignacionService();
+        this.cursoService = new CursoService();
+        cargarDatosUsuario();            
     }
     
     private ImageIcon imagen;
     private Icon icono;
-
+    public void setBack(Asignaciones back) {
+        this.back = back;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,11 +49,11 @@ public class CTec extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        txtcarnet = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        btnSave = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        lblCarnet = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,11 +62,9 @@ public class CTec extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 95)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("TECNOLOGIA");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 600, 110));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 630, 110));
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Especialidad", "IA", "Leguajes de programacion", "Microsoft" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,15 +73,11 @@ public class CTec extends javax.swing.JFrame {
         });
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 210, -1));
 
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Modalidad", "Virtual", "Presencial" }));
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 250, 150, -1));
 
-        jComboBox3.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(0, 0, 0));
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Horario", "Sabados 3pm", "Miercoles 3pm" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,24 +86,19 @@ public class CTec extends javax.swing.JFrame {
         });
         getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 250, 150, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("GUARDAR");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 150, 40));
-        getContentPane().add(txtcarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 210, 40));
-
-        jLabel4.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Ingrese su numero de carnet ");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 430, -1, -1));
+        btnSave.setText("GUARDAR");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 150, 40));
 
         jLabel3.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("<html><div style='text-align:center;'>Explora el mundo de la tecnología y adquiere habilidades clave en informática, herramientas digitales y tendencias actuales. <p>¡Prepárate para el futuro hoy!</div></html>");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 540, 80));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("🏠");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +106,14 @@ public class CTec extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 60, 40));
+
+        lblCarnet.setForeground(new java.awt.Color(255, 255, 255));
+        lblCarnet.setText("****");
+        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, -1));
+
+        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre.setText("****");
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 20));
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 490));
 
         pack();
@@ -118,9 +128,98 @@ public class CTec extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        back.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        try {
+            String cursoSeleccionado = (String) jComboBox1.getSelectedItem();
+            String modalidadSeleccionada = (String) jComboBox2.getSelectedItem();
+            String horarioSeleccionado = (String) jComboBox3.getSelectedItem();
+
+            if ("Especialidad".equals(cursoSeleccionado) ||
+                "Modalidad".equals(modalidadSeleccionada) ||
+                "Horario".equals(horarioSeleccionado)) {
+                JOptionPane.showMessageDialog(this, "Por favor complete todas las selecciones correctamente");
+                return;
+            }
+
+            Student student = SessionManager.getCurrentStudent();
+            if (student == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró información del estudiante. Por favor inicie sesión nuevamente.");
+                return;
+            }
+
+            int idCurso = mapearCursoAId(cursoSeleccionado);
+            if (idCurso == -1) {
+                JOptionPane.showMessageDialog(this, "Curso no encontrado: " + cursoSeleccionado);
+                return;
+            }
+
+            Asignacion asignacion = new Asignacion();
+            asignacion.setId_student(student.getId());
+            asignacion.setId_curse(4);
+            asignacion.setModalidad(modalidadSeleccionada);
+            asignacion.setHorario(horarioSeleccionado);
+            asignacion.setEspecialidad(cursoSeleccionado);
+
+            System.out.println("Enviando asignación: ");
+            System.out.println("ID Student: " + student.getId());
+            System.out.println("ID Curso: " + idCurso);
+            System.out.println("Modalidad: " + modalidadSeleccionada);
+            System.out.println("Horario: " + horarioSeleccionado);
+
+            Asignacion resultado = asignacionService.createAsignacion(asignacion);
+
+            if (resultado != null && resultado.getId() > 0) {
+                JOptionPane.showMessageDialog(this, "Asignación creada exitosamente");
+                limpiarSelecciones();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al crear la asignación. Por favor intente nuevamente.");
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+    private void cargarDatosUsuario() {
+        try {
+            String userType = SessionManager.getUserType();
+            if ("STUDENT".equals(userType)) {
+                Student student = SessionManager.getCurrentStudent();
+                if (student != null) {
+                    String nombre = (student.getNombre() != null) ? student.getNombre() : "Desconocido";
+                    String carnet = (student.getCarnet() != null) ? student.getCarnet() : "N/D";
+                    lblNombre.setText("Estudiante: " + nombre);
+                    lblCarnet.setText("Carnet: " + carnet);
+                } else {
+                    lblNombre.setText("Estudiante: (no disponible)");
+                    lblCarnet.setText("Carnet: (no disponible)");
+                }
+            } else {
+                lblNombre.setText("Usuario no estudiante");
+                lblCarnet.setText("");
+            }
+        } catch (Exception e) {
+            lblNombre.setText("Estudiante: (error)");
+            lblCarnet.setText("Carnet: (error)");
+        }
+    }
+private int mapearCursoAId(String nombreCurso) {
+    return switch (nombreCurso) {
+        case "IA" -> 1;
+        case "Leguajes de programacion" -> 2;
+        case "Microsoft" -> 3;
+        default -> -1;
+    };
+}
+ private void limpiarSelecciones() {
+    jComboBox1.setSelectedIndex(0);
+    jComboBox2.setSelectedIndex(0);
+    jComboBox3.setSelectedIndex(0);
+}
     /**
      * @param args the command line arguments
      */
@@ -168,15 +267,15 @@ public class CTec extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblCarnet;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblfondo;
-    private javax.swing.JTextField txtcarnet;
     // End of variables declaration//GEN-END:variables
 }

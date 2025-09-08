@@ -18,7 +18,8 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>SNAPSHOT</version>
         </dependency>
-                <!-- Cliente HTTP moderno -->
+        
+        <!-- Cliente HTTP moderno -->
         <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
@@ -32,11 +33,16 @@
             <version>2.16.0</version>
         </dependency>
 
-        <!-- SLF4J simple logger -->
+        <!-- LOGGING: ELIMINA slf4j-simple y usa solo logback -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.16</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.14</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.4.14</version>
         </dependency>
     </dependencies>
     <properties>
@@ -44,24 +50,24 @@
         <maven.compiler.release>24</maven.compiler.release>
         <exec.mainClass>com.mycompany.sistemaintecap.SistemaINTECAP</exec.mainClass>
     </properties>
-        <build>
+    <build>
         <plugins>
-<plugin>
-    <groupId>org.codehaus.mojo</groupId>
-    <artifactId>exec-maven-plugin</artifactId>
-    <version>3.5.0</version>
-    <executions>
-        <execution>
-            <goals>
-                <goal>java</goal>
-            </goals>
-        </execution>
-    </executions>
-    <configuration>
-        <mainClass>${exec.mainClass}</mainClass>
-        <jvmArgs>--enable-native-access=ALL-UNNAMED</jvmArgs>
-    </configuration>
-</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>${exec.mainClass}</mainClass>
+                    <jvmArgs>--enable-native-access=ALL-UNNAMED</jvmArgs>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
