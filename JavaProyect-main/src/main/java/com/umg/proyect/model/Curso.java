@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 public class Curso {
     private int id;
-    private Teacher teacher_id;
+    private int id_teacher;
     private String nombre;
     private String descripcion;
     private int codigo;
@@ -29,14 +29,12 @@ public class Curso {
         this.id = id;
     }
 
-
-
-    public Teacher getTeacher_id() {
-        return teacher_id;
+    public int getId_teacher() {
+        return id_teacher;
     }
 
-    public void setTeacher_id(Teacher teacher_id) {
-        this.teacher_id = teacher_id;
+    public void setId_teacher(int id_teacher) {
+        this.id_teacher = id_teacher;
     }
 
     public String getNombre() {
@@ -70,5 +68,6 @@ public class Curso {
     public void setSemestre(String semestre) {
         this.semestre = semestre;
     }
+
 
 }

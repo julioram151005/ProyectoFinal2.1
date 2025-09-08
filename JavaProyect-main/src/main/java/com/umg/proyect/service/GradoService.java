@@ -6,7 +6,7 @@ package com.umg.proyect.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.umg.proyect.model.Grado;
+import com.umg.proyect.model.Grados;
 import java.io.InputStream;
 import java.util.List;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
@@ -26,16 +26,16 @@ public class GradoService {
     private static final String BASE_URL = "https://proyectoprogramacion2-1.onrender.com/api/grados";
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public List<Grado> getGrado() throws Exception {
+    public List<Grados> getGrado() throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(BASE_URL);
             ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
             InputStream is = response.getEntity().getContent();
-            return mapper.readValue(is, new TypeReference<List<Grado>>() {});
+            return mapper.readValue(is, new TypeReference<List<Grados>>() {});
         }
     }
 
-    public Grado createGrado(Grado m) throws Exception {
+    public Grados createGrado(Grados m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPost request = new HttpPost(BASE_URL + "/create");
             String json = mapper.writeValueAsString(m);
@@ -45,11 +45,11 @@ public class GradoService {
                     .build());
             ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
             InputStream is = response.getEntity().getContent();
-            return mapper.readValue(is, Grado.class);
+            return mapper.readValue(is, Grados.class);
         }
     }
 
-    public Grado updateGrado(int id, Grado m) throws Exception {
+    public Grados updateGrado(int id, Grados m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPut request = new HttpPut(BASE_URL + "/update/" + id);
             String json = mapper.writeValueAsString(m);
@@ -59,7 +59,7 @@ public class GradoService {
                     .build());
             ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
             InputStream is = response.getEntity().getContent();
-            return mapper.readValue(is, Grado.class);
+            return mapper.readValue(is, Grados.class);
         }
     }
     

@@ -10,14 +10,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  *
  * @author josth
  */
-public class Grado {
+public class Grados {
     private int id;
-    private Curso id_curso;
-    private Student id_student;
+    private int id_curso;    
+    private int id_student;  
     private int nota;
     private String tipo;
     
-    public Grado(){
+    public Grados(){
     }
 
     public int getId() {
@@ -28,19 +28,19 @@ public class Grado {
         this.id = id;
     }
 
-    public Curso getId_curso() {
+    public int getId_curso() {
         return id_curso;
     }
 
-    public void setId_curso(Curso id_curso) {
+    public void setId_curso(int id_curso) {
         this.id_curso = id_curso;
     }
 
-    public Student getId_student() {
+    public int getId_student() {
         return id_student;
     }
 
-    public void setId_student(Student id_student) {
+    public void setId_student(int id_student) {
         this.id_student = id_student;
     }
 
@@ -59,5 +59,7 @@ public class Grado {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+
 
 }

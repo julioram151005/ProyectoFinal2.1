@@ -22,6 +22,12 @@ public class Asignaciones extends javax.swing.JFrame {
         this.Imagen(this.lblfondo, "src/main/java/img/f.png");
         this.Imagen(this.lbllogo, "src/main/java/img/logo.png");
         this.Imagen(this.lblimg, "src/main/java/img/chico.png");
+        this.Imagen(this.lblfondo, "src/main/java/img/cursos.png");
+        this.Imagen(this.lblPintura, "src/main/java/img/pintura.png");
+        this.Imagen(this.lblMusica, "src/main/java/img/musica.png");
+        this.Imagen(this.lblIdioma, "src/main/java/img/idioma.png");
+        this.Imagen(this.lbltec, "src/main/java/img/tec.png");
+        this.Imagen(this.lbllogo, "src/main/java/img/logo.png");        
         cargarDatosUsuario();
     }
     public void setBack(InicioSesion back) {
@@ -49,13 +55,18 @@ public class Asignaciones extends javax.swing.JFrame {
         lblmodalidad = new javax.swing.JLabel();
         lblimg = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        btnIdioma = new javax.swing.JButton();
-        btnPintura = new javax.swing.JButton();
-        btnMusica = new javax.swing.JButton();
-        btnTecnologia = new javax.swing.JButton();
         lblNombre = new javax.swing.JLabel();
         lblCarnet = new javax.swing.JLabel();
+        btnidioma = new javax.swing.JButton();
+        lblPintura = new javax.swing.JLabel();
+        btnMusica1 = new javax.swing.JButton();
+        lblMusica = new javax.swing.JLabel();
+        btnidioma1 = new javax.swing.JButton();
+        lblIdioma = new javax.swing.JLabel();
+        btntec = new javax.swing.JButton();
+        lbltec = new javax.swing.JLabel();
         lblfondo = new javax.swing.JLabel();
+        lbltec1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,7 +79,7 @@ public class Asignaciones extends javax.swing.JFrame {
 
         lblhorario.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         lblhorario.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lblhorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 390, 190, 30));
+        getContentPane().add(lblhorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 190, 30));
 
         lblnombre.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         lblnombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -85,12 +96,12 @@ public class Asignaciones extends javax.swing.JFrame {
 
         lblespecialidad.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         lblespecialidad.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lblespecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 190, 30));
+        getContentPane().add(lblespecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 130, 190, 30));
 
         lblmodalidad.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         lblmodalidad.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(lblmodalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 190, 30));
-        getContentPane().add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 340, 380));
+        getContentPane().add(lblmodalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 190, 30));
+        getContentPane().add(lblimg, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 210, 340, 380));
 
         btnBack.setText("Regreso");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -100,38 +111,6 @@ public class Asignaciones extends javax.swing.JFrame {
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
 
-        btnIdioma.setText("Idiomas");
-        btnIdioma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIdiomaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnIdioma, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 150, 90));
-
-        btnPintura.setText("Pintura");
-        btnPintura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPinturaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnPintura, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 140, 80));
-
-        btnMusica.setText("Musica");
-        btnMusica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMusicaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnMusica, new org.netbeans.lib.awtextra.AbsoluteConstraints(112, 330, 150, 80));
-
-        btnTecnologia.setText("Tecnologia");
-        btnTecnologia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTecnologiaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnTecnologia, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 150, 80));
-
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("****");
         getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 210, -1));
@@ -139,7 +118,56 @@ public class Asignaciones extends javax.swing.JFrame {
         lblCarnet.setForeground(new java.awt.Color(255, 255, 255));
         lblCarnet.setText("****");
         getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 220, -1));
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 490));
+
+        btnidioma.setBackground(new java.awt.Color(51, 51, 255));
+        btnidioma.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
+        btnidioma.setForeground(new java.awt.Color(255, 255, 255));
+        btnidioma.setText("Inscribirme");
+        btnidioma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnidiomaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnidioma, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 150, 30));
+        getContentPane().add(lblPintura, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 130, 120));
+
+        btnMusica1.setBackground(new java.awt.Color(51, 51, 255));
+        btnMusica1.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
+        btnMusica1.setForeground(new java.awt.Color(255, 255, 255));
+        btnMusica1.setText("Inscribirme");
+        btnMusica1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMusica1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMusica1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 310, 150, 30));
+        getContentPane().add(lblMusica, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, 130, 130));
+
+        btnidioma1.setBackground(new java.awt.Color(51, 51, 255));
+        btnidioma1.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
+        btnidioma1.setForeground(new java.awt.Color(255, 255, 255));
+        btnidioma1.setText("Inscribirme");
+        btnidioma1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnidioma1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnidioma1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 150, 30));
+        getContentPane().add(lblIdioma, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 120, 100));
+
+        btntec.setBackground(new java.awt.Color(51, 51, 255));
+        btntec.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
+        btntec.setForeground(new java.awt.Color(255, 255, 255));
+        btntec.setText("Inscribirme");
+        btntec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntecActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btntec, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 460, 150, 30));
+        getContentPane().add(lbltec, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 130, 100));
+        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 540));
+        getContentPane().add(lbltec1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 240, 150, 150));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -149,33 +177,33 @@ public class Asignaciones extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnPinturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinturaActionPerformed
-        CPintura idio= new CPintura();
-        idio.setBack(this);
-        idio.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnPinturaActionPerformed
-
-    private void btnIdiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIdiomaActionPerformed
+    private void btnidiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnidiomaActionPerformed
         CIdiomas idio= new CIdiomas();
         idio.setBack(this);
         idio.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnIdiomaActionPerformed
+    }//GEN-LAST:event_btnidiomaActionPerformed
 
-    private void btnMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicaActionPerformed
+    private void btnMusica1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusica1ActionPerformed
         CMusica idio= new CMusica();
         idio.setBack(this);
         idio.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnMusicaActionPerformed
+    }//GEN-LAST:event_btnMusica1ActionPerformed
 
-    private void btnTecnologiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTecnologiaActionPerformed
+    private void btnidioma1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnidioma1ActionPerformed
+        CMusica idio= new CMusica();
+        idio.setBack(this);
+        idio.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnidioma1ActionPerformed
+
+    private void btntecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntecActionPerformed
         CTec idio= new CTec();
         idio.setBack(this);
         idio.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnTecnologiaActionPerformed
+    }//GEN-LAST:event_btntecActionPerformed
 
 private void cargarDatosUsuario() {
     if (SessionManager.getUserType().equals("STUDENT")) {
@@ -233,14 +261,17 @@ private void cargarDatosUsuario() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnIdioma;
-    private javax.swing.JButton btnMusica;
-    private javax.swing.JButton btnPintura;
-    private javax.swing.JButton btnTecnologia;
+    private javax.swing.JButton btnMusica1;
+    private javax.swing.JButton btnidioma;
+    private javax.swing.JButton btnidioma1;
+    private javax.swing.JButton btntec;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblCarnet;
+    private javax.swing.JLabel lblIdioma;
+    private javax.swing.JLabel lblMusica;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblPintura;
     private javax.swing.JLabel lblcurso;
     private javax.swing.JLabel lblespecialidad;
     private javax.swing.JLabel lblfondo;
@@ -249,5 +280,7 @@ private void cargarDatosUsuario() {
     private javax.swing.JLabel lbllogo;
     private javax.swing.JLabel lblmodalidad;
     private javax.swing.JLabel lblnombre;
+    private javax.swing.JLabel lbltec;
+    private javax.swing.JLabel lbltec1;
     // End of variables declaration//GEN-END:variables
 }

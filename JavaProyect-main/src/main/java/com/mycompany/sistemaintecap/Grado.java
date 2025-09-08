@@ -4,27 +4,46 @@
  */
 package com.mycompany.sistemaintecap;
 
+import com.umg.proyect.model.Grados;
+import com.umg.proyect.model.Student;
+import com.umg.proyect.model.Teacher;
+import com.umg.proyect.model.Curso;
+import com.umg.proyect.service.GradoService;
+import com.umg.proyect.service.StudentService;
+import com.umg.proyect.service.CursoService;
+import com.umg.proyect.util.SessionManager;
 import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 /**
  *
  * @author usuario
  */
 public class Grado extends javax.swing.JFrame {
-
+    private final GradoService gradoService = new GradoService();
+    private final StudentService studentService = new StudentService();
+    private final CursoService cursoService = new CursoService();
+    private final DefaultTableModel model;
+    private Curso cursoDocente;
+    private Cursos back;
+    
+    
     /**
      * Creates new form Grado
      */
     public Grado() {
         initComponents();
         this.setLocationRelativeTo(this);
-        this.Imagen(this.lblfondo, "src/main/java/img/f.png");
+        this.Imagen(this.txtTipo, "src/main/java/img/f.png");
         this.Imagen(this.lbllogo, "src/main/java/img/logo.png");
+        model = (DefaultTableModel) jTableStudent.getModel(); // ← Cambiado a jTableStudent
+        cargarDatosDocente();
     }
-    
+    public void setBack(Cursos back) {
+        this.back = back;
+    } 
     private ImageIcon imagen;
     private Icon icono;
 
@@ -38,16 +57,71 @@ public class Grado extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableStudent = new javax.swing.JTable();
         lbllogo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        lblfondo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtNota = new javax.swing.JTextField();
+        jTextField1 = new javax.swing.JTextField();
+        lblDocente = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableGrados = new javax.swing.JTable();
+        lblCurso = new javax.swing.JLabel();
+        txtCursoId = new javax.swing.JLabel();
+        btnSubir = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtStudentId = new javax.swing.JTextField();
+        btnConsultarEstudiantes = new javax.swing.JButton();
+        btnConsultarGrados = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        txtTipo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableStudent.setForeground(new java.awt.Color(255, 255, 255));
+        jTableStudent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "NOMBRE", "CARNET", "ESTADO"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableStudent);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 720, 120));
+        getContentPane().add(lbllogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 150, 70));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Estudiantes");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 380, 70));
+
+        jLabel1.setText("Nota:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 300, 50, -1));
+
+        jLabel3.setText("Tipo de evaluacion:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 130, -1));
+        getContentPane().add(txtNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 80, -1));
+
+        lblDocente.setText("****");
+        getContentPane().add(lblDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 170, -1));
+
+        jTableGrados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -55,31 +129,198 @@ public class Grado extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "NOMBRE", "EMAIL", "CARNET", "ESTADO"
+                "id_curso", "id_student", "nota", "tipo", "createdAt"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+        ));
+        jScrollPane2.setViewportView(jTableGrados);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 710, 220));
+
+        lblCurso.setText("****");
+        getContentPane().add(lblCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 120, -1));
+
+        txtCursoId.setText("****");
+        getContentPane().add(txtCursoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 190, -1));
+
+        btnSubir.setText("Subir Notas");
+        btnSubir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubirActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        getContentPane().add(btnSubir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 580, -1, -1));
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 720, 360));
-        getContentPane().add(lbllogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 150, 70));
+        jLabel4.setText("ID estudiante:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
+        getContentPane().add(txtStudentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Estudiantes");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 380, 70));
-        getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 490));
+        btnConsultarEstudiantes.setText("Ver Estudiante");
+        btnConsultarEstudiantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarEstudiantesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnConsultarEstudiantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, -1, -1));
+
+        btnConsultarGrados.setText("Ver Notas");
+        btnConsultarGrados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarGradosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnConsultarGrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 580, -1, -1));
+
+        btnBack.setText("Regreso");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
+        getContentPane().add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnConsultarGradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarGradosActionPerformed
+        consultarGrados();
+    }//GEN-LAST:event_btnConsultarGradosActionPerformed
+
+    private void btnConsultarEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEstudiantesActionPerformed
+        consultarEstudiantes();
+    }//GEN-LAST:event_btnConsultarEstudiantesActionPerformed
+
+    private void btnSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirActionPerformed
+        subirGrado();
+    }//GEN-LAST:event_btnSubirActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        back.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnBackActionPerformed
+    private void cargarDatosDocente() {
+        if ("TEACHER".equals(SessionManager.getUserType())) {
+            Teacher teacher = SessionManager.getCurrentTeacher();
+            lblDocente.setText("Docente: " + teacher.getNombre());
+            try {
+                cursoDocente = obtenerCursoDocente(teacher.getId());
+                if (cursoDocente != null) {
+                    lblCurso.setText("Curso: " + cursoDocente.getNombre());
+                    txtCursoId.setText(String.valueOf(cursoDocente.getId()));
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al cargar curso: " + e.getMessage());
+            }
+        }
+    }
+    private Curso obtenerCursoDocente(int idTeacher) throws Exception {
+        List<Curso> cursos = cursoService.getCursos();
+        for (Curso curso : cursos) {
+            if (curso.getId_teacher() == idTeacher) {
+                return curso;
+            }
+        }
+        return null;
+    }    
+    private void subirGrado() {
+        try {
+
+            if (txtStudentId.getText().isEmpty() || txtNota.getText().isEmpty() || jTextField1.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
+                return;
+            }
+            
+            Grados g = new Grados();
+            g.setId_student(Integer.parseInt(txtStudentId.getText()));
+            g.setId_curso(Integer.parseInt(txtCursoId.getText()));
+            g.setNota(Integer.parseInt(txtNota.getText()));
+            g.setTipo(jTextField1.getText());
+            
+            Grados resultado = gradoService.createGrado(g);
+            
+            if (resultado != null) {
+                JOptionPane.showMessageDialog(this, "Grado subido correctamente");
+                limpiarCampos();
+                consultarGrados(); // Actualizar tabla
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al subir grado");
+            }
+            
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese valores numéricos válidos");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al subir grado: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    private void consultarEstudiantes() {
+        try {
+            List<Student> estudiantes = studentService.getStudent();
+            DefaultTableModel model = (DefaultTableModel) jTableStudent.getModel();
+            model.setRowCount(0);
+            
+            for (Student s : estudiantes) {
+                model.addRow(new Object[]{
+                    s.getId(), 
+                    s.getNombre(), 
+                    s.getCarnet(),
+                    s.getEstado() ? "Activo" : "Inactivo"
+                });
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al consultar estudiantes: " + ex.getMessage());
+        }
+    }    
+    private void Imagen(JLabel lbl, String ruta){
+        this.imagen = new ImageIcon(ruta);
+        this.icono = new ImageIcon(
+                this.imagen.getImage().getScaledInstance(lbl.getWidth(), 
+                        lbl.getHeight(), 
+                        Image.SCALE_DEFAULT)
+        );
+        lbl.setIcon(this.icono);
+        this.repaint();
+    }
+
+    private void consultarGrados() {
+        try {
+            List<Grados> grados = gradoService.getGrado();
+            DefaultTableModel model = (DefaultTableModel) jTableGrados.getModel();
+            model.setRowCount(0);
+            
+            if (cursoDocente != null) {
+                for (Grados g : grados) {
+                    if (g.getId_curso() == cursoDocente.getId()) {
+                        model.addRow(new Object[]{
+                            g.getId_curso(), 
+                            g.getId_student(), 
+                            g.getNota(), 
+                            g.getTipo(),
+                            "Fecha"
+                        });
+                    }
+                }
+            } else {
+                for (Grados g : grados) {
+                    model.addRow(new Object[]{
+                        g.getId_curso(), 
+                        g.getId_student(), 
+                        g.getNota(), 
+                        g.getTipo(),
+                        "Fecha"
+                    });
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al consultar grados: " + ex.getMessage());
+        }
+    }    
+    
+    private void limpiarCampos() {
+        txtStudentId.setText("");
+        txtNota.setText("");
+        jTextField1.setText("");
+    }  
     /**
      * @param args the command line arguments
      */
@@ -97,14 +338,15 @@ public class Grado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Grado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Grado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Grado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Grado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -114,23 +356,27 @@ public class Grado extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void Imagen(JLabel lbl, String ruta){
-        this.imagen = new ImageIcon(ruta);
-        this.icono = new ImageIcon(
-                this.imagen.getImage().getScaledInstance(lbl.getWidth(), 
-                        lbl.getHeight(), 
-                        Image.SCALE_DEFAULT)
-        );
-        lbl.setIcon(this.icono);
-        this.repaint();
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnConsultarEstudiantes;
+    private javax.swing.JButton btnConsultarGrados;
+    private javax.swing.JButton btnSubir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lblfondo;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableGrados;
+    private javax.swing.JTable jTableStudent;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblCurso;
+    private javax.swing.JLabel lblDocente;
     private javax.swing.JLabel lbllogo;
+    private javax.swing.JLabel txtCursoId;
+    private javax.swing.JTextField txtNota;
+    private javax.swing.JTextField txtStudentId;
+    private javax.swing.JLabel txtTipo;
     // End of variables declaration//GEN-END:variables
 }

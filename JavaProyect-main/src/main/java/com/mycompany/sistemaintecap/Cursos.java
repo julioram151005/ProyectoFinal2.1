@@ -4,18 +4,24 @@
  */
 package com.mycompany.sistemaintecap;
 
+import com.umg.proyect.model.Curso;
+import com.umg.proyect.model.Teacher;
+import com.umg.proyect.service.AsignacionService;
+import com.umg.proyect.service.CursoService;
+import com.umg.proyect.util.SessionManager;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Cursos extends javax.swing.JFrame {
     private InicioSesion back;
-
+    private final AsignacionService asignacionService;
+    private final CursoService cursoService;    
     public Cursos() {
         initComponents();
-        
         this.setLocationRelativeTo(this);
         this.Imagen(this.lblfondo, "src/main/java/img/cursos.png");
         this.Imagen(this.lblPintura, "src/main/java/img/pintura.png");
@@ -23,6 +29,9 @@ public class Cursos extends javax.swing.JFrame {
         this.Imagen(this.lblidioma, "src/main/java/img/idioma.png");
         this.Imagen(this.lbltec, "src/main/java/img/tec.png");
         this.Imagen(this.lbllogo, "src/main/java/img/logo.png");
+        cargarDatosDocente();
+    this.asignacionService = new AsignacionService();
+    this.cursoService = new CursoService();      
         
     }
     public void setBack(InicioSesion back) {
@@ -40,7 +49,7 @@ public class Cursos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btntec = new javax.swing.JButton();
+        btnTecno = new javax.swing.JButton();
         btnidioma = new javax.swing.JButton();
         btnMusica = new javax.swing.JButton();
         lblMusica = new javax.swing.JLabel();
@@ -51,26 +60,29 @@ public class Cursos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lbllogo = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
+        lblEspecialidad = new javax.swing.JLabel();
+        btnNotas = new javax.swing.JButton();
         lblfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btntec.setBackground(new java.awt.Color(51, 51, 255));
-        btntec.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
-        btntec.setForeground(new java.awt.Color(255, 255, 255));
-        btntec.setText("Inscribirme");
-        btntec.addActionListener(new java.awt.event.ActionListener() {
+        btnTecno.setBackground(new java.awt.Color(51, 51, 255));
+        btnTecno.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
+        btnTecno.setForeground(new java.awt.Color(255, 255, 255));
+        btnTecno.setText("Asignar Curso");
+        btnTecno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btntecActionPerformed(evt);
+                btnTecnoActionPerformed(evt);
             }
         });
-        getContentPane().add(btntec, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 380, 150, 30));
+        getContentPane().add(btnTecno, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 380, 150, 30));
 
         btnidioma.setBackground(new java.awt.Color(51, 51, 255));
         btnidioma.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
         btnidioma.setForeground(new java.awt.Color(255, 255, 255));
-        btnidioma.setText("Inscribirme");
+        btnidioma.setText("Asignar Curso");
         btnidioma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnidiomaActionPerformed(evt);
@@ -81,7 +93,7 @@ public class Cursos extends javax.swing.JFrame {
         btnMusica.setBackground(new java.awt.Color(51, 51, 255));
         btnMusica.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
         btnMusica.setForeground(new java.awt.Color(255, 255, 255));
-        btnMusica.setText("Inscribirme");
+        btnMusica.setText("Asignar Curso");
         btnMusica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMusicaActionPerformed(evt);
@@ -93,7 +105,7 @@ public class Cursos extends javax.swing.JFrame {
         btnPintura.setBackground(new java.awt.Color(51, 51, 255));
         btnPintura.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N
         btnPintura.setForeground(new java.awt.Color(255, 255, 255));
-        btnPintura.setText("Inscribirme");
+        btnPintura.setText("Asignar Curso");
         btnPintura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPinturaActionPerformed(evt);
@@ -117,32 +129,101 @@ public class Cursos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
+
+        lblNombre.setText("****");
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 160, -1));
+
+        lblEspecialidad.setText("****");
+        getContentPane().add(lblEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 160, -1));
+
+        btnNotas.setText("Evaluacion");
+        btnNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnNotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, -1, -1));
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicaActionPerformed
-        // TODO add your handling code here:
+        asignarCursoDocente("Musica");
     }//GEN-LAST:event_btnMusicaActionPerformed
 
     private void btnPinturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPinturaActionPerformed
-        // TODO add your handling code here:
+        asignarCursoDocente("Pintura");
     }//GEN-LAST:event_btnPinturaActionPerformed
 
     private void btnidiomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnidiomaActionPerformed
-        // TODO add your handling code here:
+        asignarCursoDocente("Idioma");
     }//GEN-LAST:event_btnidiomaActionPerformed
 
-    private void btntecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntecActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btntecActionPerformed
+    private void btnTecnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTecnoActionPerformed
+        asignarCursoDocente("Tecnologia");
+    }//GEN-LAST:event_btnTecnoActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         back.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotasActionPerformed
+        Grado login1= new Grado();
+        login1.setBack(this);
+        login1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnNotasActionPerformed
+
+    private void cargarDatosDocente() {
+        if (SessionManager.getUserType().equals("TEACHER")) {
+            Teacher teacher = SessionManager.getCurrentTeacher();
+            lblNombre.setText("Docente: " + teacher.getNombre());
+            lblEspecialidad.setText("Especialidad: " + teacher.getEspecialidad());
+        }
+    }
+    
+private void asignarCursoDocente(String nombreCurso) {
+    try {
+        Teacher teacher = SessionManager.getCurrentTeacher();
+        if (teacher == null) {
+            JOptionPane.showMessageDialog(this, "No se encontró información del docente");
+            return;
+        }
+        
+        Curso curso = cursoService.obtenerCursoPorNombre(nombreCurso);
+        if (curso == null) {
+            JOptionPane.showMessageDialog(this, "Curso no encontrado: " + nombreCurso);
+            return;
+        }
+        
+        if (verificarCursoAsignado(teacher.getId(), curso.getId())) {
+            JOptionPane.showMessageDialog(this, "Ya tienes asignado el curso: " + nombreCurso);
+            return;
+        }
+        
+        curso.setId_teacher(teacher.getId());
+        
+        Curso cursoActualizado = cursoService.updateCurso(curso.getId(), curso);
+        
+        if (cursoActualizado != null) {
+            JOptionPane.showMessageDialog(this, "Curso '" + nombreCurso + "' asignado exitosamente\n" +
+                                               "Ahora eres el docente de este curso");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al asignar el curso '" + nombreCurso + "'");
+        }
+        
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+        ex.printStackTrace();
+    }
+}
+private boolean verificarCursoAsignado(int idTeacher, int idCurso) throws Exception {
+    // Obtener el curso para verificar si ya tiene docente asignado
+    Curso curso = cursoService.obtenerCursoPorId(idCurso);
+    return curso != null && curso.getId_teacher() == idTeacher;
+}
     /**
      * @param args the command line arguments
      */
@@ -193,11 +274,14 @@ public class Cursos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnMusica;
+    private javax.swing.JButton btnNotas;
     private javax.swing.JButton btnPintura;
+    private javax.swing.JButton btnTecno;
     private javax.swing.JButton btnidioma;
-    private javax.swing.JButton btntec;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblEspecialidad;
     private javax.swing.JLabel lblMusica;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPintura;
     private javax.swing.JLabel lblfondo;
     private javax.swing.JLabel lblidioma;

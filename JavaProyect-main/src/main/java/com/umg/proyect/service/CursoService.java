@@ -48,15 +48,27 @@ public class CursoService {
             return mapper.readValue(is, Curso.class);
         }
     }
-    public int obtenerIdCursoPorNombre(String nombreCurso) throws Exception {
-        List<Curso> cursos = getCursos();
-        for (Curso curso : cursos) {
-            if (curso.getNombre().equalsIgnoreCase(nombreCurso)) {
-                return curso.getId();
-            }
+public Curso obtenerCursoPorNombre(String nombreCurso) throws Exception {
+    List<Curso> cursos = getCursos();
+    for (Curso curso : cursos) {
+        if (curso.getNombre().equalsIgnoreCase(nombreCurso)) {
+            return curso;
         }
-        return -1; // Retorna -1 si no encuentra
     }
+    return null; // Retorna null si no encuentra
+}
+public Curso obtenerCursoPorId(int id) throws Exception {
+    try (CloseableHttpClient client = HttpClients.createDefault()) {
+        HttpGet request = new HttpGet(BASE_URL + "/" + id);
+        ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
+        
+        if (response.getCode() == 200) {
+            InputStream is = response.getEntity().getContent();
+            return mapper.readValue(is, Curso.class);
+        }
+        return null;
+    }
+}
     public Curso updateCurso(int id, Curso m) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpPut request = new HttpPut(BASE_URL + "/update/" + id);
@@ -70,6 +82,7 @@ public class CursoService {
             return mapper.readValue(is, Curso.class);
         }
     }
+    
 /*
     public void deleteStudent(int id) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
