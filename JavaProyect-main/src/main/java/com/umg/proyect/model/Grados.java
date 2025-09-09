@@ -1,22 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.umg.proyect.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.time.LocalDateTime;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-/**
- *
- * @author josth
- */
 public class Grados {
     private int id;
     private int id_curso;    
     private int id_student;  
     private int nota;
     private String tipo;
-    
+    private String createdAt;
+
     public Grados(){
     }
 
@@ -60,6 +55,11 @@ public class Grados {
         this.tipo = tipo;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 }

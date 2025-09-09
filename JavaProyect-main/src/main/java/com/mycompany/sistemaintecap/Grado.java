@@ -4,18 +4,22 @@
  */
 package com.mycompany.sistemaintecap;
 
+import com.umg.proyect.model.Asignacion;
 import com.umg.proyect.model.Grados;
 import com.umg.proyect.model.Student;
 import com.umg.proyect.model.Teacher;
 import com.umg.proyect.model.Curso;
+import com.umg.proyect.service.AsignacionService;
 import com.umg.proyect.service.GradoService;
 import com.umg.proyect.service.StudentService;
 import com.umg.proyect.service.CursoService;
 import com.umg.proyect.util.SessionManager;
 import java.awt.Image;
+import java.time.LocalDateTime;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -25,7 +29,9 @@ public class Grado extends javax.swing.JFrame {
     private final GradoService gradoService = new GradoService();
     private final StudentService studentService = new StudentService();
     private final CursoService cursoService = new CursoService();
-    private final DefaultTableModel model;
+    private final AsignacionService asignacionService = new AsignacionService();
+    private DefaultTableModel modelStudent;
+    private DefaultTableModel modelGrados;
     private Curso cursoDocente;
     private Cursos back;
     
@@ -35,10 +41,16 @@ public class Grado extends javax.swing.JFrame {
      */
     public Grado() {
         initComponents();
-        this.setLocationRelativeTo(this);
-        this.Imagen(this.txtTipo, "src/main/java/img/f.png");
-        this.Imagen(this.lbllogo, "src/main/java/img/logo.png");
-        model = (DefaultTableModel) jTableStudent.getModel(); // ← Cambiado a jTableStudent
+        this.setLocationRelativeTo(this); 
+        this.Imagen(this.lblFondo, "src/main/java/img/f.png");
+        this.Imagen(this.lblLogo, "src/main/java/img/logo.png");
+        
+
+        modelStudent = new DefaultTableModel(new String[]{"ID", "Nombre", "Carnet", "Estado"}, 0);
+        jTableStudent.setModel(modelStudent);
+
+        modelGrados = new DefaultTableModel(new String[]{"ID Curso", "ID Estudiante", "Nota", "Tipo", "Fecha"}, 0);
+        jTableGrados.setModel(modelGrados);
         cargarDatosDocente();
     }
     public void setBack(Cursos back) {
@@ -58,7 +70,7 @@ public class Grado extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableStudent = new javax.swing.JTable();
-        lbllogo = new javax.swing.JLabel();
+        lblLogo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -75,7 +87,7 @@ public class Grado extends javax.swing.JFrame {
         btnConsultarEstudiantes = new javax.swing.JButton();
         btnConsultarGrados = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        txtTipo = new javax.swing.JLabel();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,7 +115,7 @@ public class Grado extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableStudent);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 720, 120));
-        getContentPane().add(lbllogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 150, 70));
+        getContentPane().add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 150, 70));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -115,7 +127,7 @@ public class Grado extends javax.swing.JFrame {
 
         jLabel3.setText("Tipo de evaluacion:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 130, -1));
-        getContentPane().add(txtNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
+        getContentPane().add(txtNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 90, -1));
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 80, -1));
 
         lblDocente.setText("****");
@@ -152,7 +164,7 @@ public class Grado extends javax.swing.JFrame {
 
         jLabel4.setText("ID estudiante:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
-        getContentPane().add(txtStudentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
+        getContentPane().add(txtStudentId, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 80, -1));
 
         btnConsultarEstudiantes.setText("Ver Estudiante");
         btnConsultarEstudiantes.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +189,7 @@ public class Grado extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
-        getContentPane().add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 610));
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -187,7 +199,12 @@ public class Grado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarGradosActionPerformed
 
     private void btnConsultarEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarEstudiantesActionPerformed
-        consultarEstudiantes();
+
+        if (cursoDocente != null) {
+            consultarEstudiantesPorCurso(cursoDocente.getId());
+        } else {
+            consultarEstudiantes();
+        }
     }//GEN-LAST:event_btnConsultarEstudiantesActionPerformed
 
     private void btnSubirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubirActionPerformed
@@ -201,7 +218,9 @@ public class Grado extends javax.swing.JFrame {
     private void cargarDatosDocente() {
         if ("TEACHER".equals(SessionManager.getUserType())) {
             Teacher teacher = SessionManager.getCurrentTeacher();
-            lblDocente.setText("Docente: " + teacher.getNombre());
+            if (teacher != null) {
+                lblDocente.setText("Docente: " + teacher.getNombre());
+            }
             try {
                 cursoDocente = obtenerCursoDocente(teacher.getId());
                 if (cursoDocente != null) {
@@ -221,106 +240,140 @@ public class Grado extends javax.swing.JFrame {
             }
         }
         return null;
-    }    
-    private void subirGrado() {
-        try {
-
-            if (txtStudentId.getText().isEmpty() || txtNota.getText().isEmpty() || jTextField1.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
-                return;
-            }
-            
-            Grados g = new Grados();
-            g.setId_student(Integer.parseInt(txtStudentId.getText()));
-            g.setId_curso(Integer.parseInt(txtCursoId.getText()));
-            g.setNota(Integer.parseInt(txtNota.getText()));
-            g.setTipo(jTextField1.getText());
-            
-            Grados resultado = gradoService.createGrado(g);
-            
-            if (resultado != null) {
-                JOptionPane.showMessageDialog(this, "Grado subido correctamente");
-                limpiarCampos();
-                consultarGrados(); // Actualizar tabla
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al subir grado");
-            }
-            
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Por favor ingrese valores numéricos válidos");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error al subir grado: " + ex.getMessage());
-            ex.printStackTrace();
+    }  
+private void subirGrado() {
+    try {
+        if (txtStudentId.getText().isEmpty() || txtNota.getText().isEmpty() || jTextField1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor complete todos los campos");
+            return;
         }
+
+        if (txtCursoId.getText().equals("****") || txtCursoId.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontró curso asignado");
+            return;
+        }
+
+        Grados g = new Grados();
+        g.setId_student(Integer.parseInt(txtStudentId.getText()));
+        g.setId_curso(Integer.parseInt(txtCursoId.getText())); 
+        g.setNota(Integer.parseInt(txtNota.getText()));
+        g.setTipo(jTextField1.getText());
+        g.setCreatedAt(LocalDateTime.now().toString()); 
+
+        Grados resultado = gradoService.createGrado(g);
+
+        if (resultado != null) {
+            JOptionPane.showMessageDialog(this, "Grado subido correctamente");
+            limpiarCampos();
+            consultarGrados();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al subir grado");
+        }
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Por favor ingrese valores numéricos válidos");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error al subir grado: " + ex.getMessage());
+        ex.printStackTrace();
     }
+}
+    
     private void consultarEstudiantes() {
         try {
             List<Student> estudiantes = studentService.getStudent();
-            DefaultTableModel model = (DefaultTableModel) jTableStudent.getModel();
-            model.setRowCount(0);
-            
+            modelStudent.setRowCount(0);
+
             for (Student s : estudiantes) {
-                model.addRow(new Object[]{
-                    s.getId(), 
-                    s.getNombre(), 
-                    s.getCarnet(),
-                    s.getEstado() ? "Activo" : "Inactivo"
-                });
+                String estado;
+                try {
+                    // si getEstado() devuelve Boolean o boolean
+                    Object e = s.getEstado();
+                    if (e instanceof Boolean) {
+                        estado = ((Boolean) e) ? "Activo" : "Inactivo";
+                    } else {
+                        estado = (e != null) ? e.toString() : "Desconocido";
+                    }
+                } catch (Exception ex) {
+                    estado = "Desconocido";
+                }
+
+                modelStudent.addRow(new Object[]{s.getId(), s.getNombre(), s.getCarnet(), estado});
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al consultar estudiantes: " + ex.getMessage());
+            ex.printStackTrace();
         }
     }    
-    private void Imagen(JLabel lbl, String ruta){
-        this.imagen = new ImageIcon(ruta);
-        this.icono = new ImageIcon(
-                this.imagen.getImage().getScaledInstance(lbl.getWidth(), 
-                        lbl.getHeight(), 
-                        Image.SCALE_DEFAULT)
-        );
-        lbl.setIcon(this.icono);
-        this.repaint();
+    private void consultarEstudiantesPorCurso(int idCurso) {
+        try {
+            List<Asignacion> asignaciones = asignacionService.getAsignacionesPorCurso(idCurso);
+            List<Student> todosEstudiantes = studentService.getStudent();
+
+            List<Student> estudiantesFiltrados = todosEstudiantes.stream()
+                    .filter(est -> asignaciones.stream()
+                            .anyMatch(asig -> asig.getId_student() == est.getId()))
+                    .collect(Collectors.toList());
+
+            modelStudent.setRowCount(0);
+
+            for (Student s : estudiantesFiltrados) {
+                String estado;
+                try {
+                    Object e = s.getEstado();
+                    if (e instanceof Boolean) estado = ((Boolean) e) ? "Activo" : "Inactivo";
+                    else estado = (e != null) ? e.toString() : "Desconocido";
+                } catch (Exception ex) {
+                    estado = "Desconocido";
+                }
+                modelStudent.addRow(new Object[]{s.getId(), s.getNombre(), s.getCarnet(), estado});
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al consultar estudiantes: " + ex.getMessage());
+            ex.printStackTrace();
+        }
     }
+
 
     private void consultarGrados() {
         try {
             List<Grados> grados = gradoService.getGrado();
-            DefaultTableModel model = (DefaultTableModel) jTableGrados.getModel();
-            model.setRowCount(0);
-            
+            modelGrados.setRowCount(0);
+
             if (cursoDocente != null) {
                 for (Grados g : grados) {
                     if (g.getId_curso() == cursoDocente.getId()) {
-                        model.addRow(new Object[]{
-                            g.getId_curso(), 
-                            g.getId_student(), 
-                            g.getNota(), 
+                        modelGrados.addRow(new Object[]{
+                            g.getId_curso(),
+                            g.getId_student(),
+                            g.getNota(),
                             g.getTipo(),
-                            "Fecha"
+                            g.getCreatedAt() != null ? g.getCreatedAt().toString() : "N/A"
                         });
                     }
                 }
             } else {
                 for (Grados g : grados) {
-                    model.addRow(new Object[]{
-                        g.getId_curso(), 
-                        g.getId_student(), 
-                        g.getNota(), 
+                    modelGrados.addRow(new Object[]{
+                        g.getId_curso(),
+                        g.getId_student(),
+                        g.getNota(),
                         g.getTipo(),
-                        "Fecha"
+                        g.getCreatedAt() != null ? g.getCreatedAt().toString() : "N/A"
                     });
                 }
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al consultar grados: " + ex.getMessage());
+            ex.printStackTrace();
         }
-    }    
+    } 
     
-    private void limpiarCampos() {
-        txtStudentId.setText("");
-        txtNota.setText("");
-        jTextField1.setText("");
-    }  
+private void limpiarCampos() {
+    txtStudentId.setText("");
+    txtNota.setText("");
+    jTextField1.setText("");
+}
     /**
      * @param args the command line arguments
      */
@@ -338,13 +391,13 @@ public class Grado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Grados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Grados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Grados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Grados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Grado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -356,7 +409,16 @@ public class Grado extends javax.swing.JFrame {
             }
         });
     }
-
+     private void Imagen(JLabel lbl, String ruta){
+        this.imagen = new ImageIcon(ruta);
+        this.icono = new ImageIcon(
+                this.imagen.getImage().getScaledInstance(lbl.getWidth(), 
+                        lbl.getHeight(), 
+                        Image.SCALE_DEFAULT)
+        );
+        lbl.setIcon(this.icono);
+        this.repaint();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnConsultarEstudiantes;
@@ -373,10 +435,10 @@ public class Grado extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCurso;
     private javax.swing.JLabel lblDocente;
-    private javax.swing.JLabel lbllogo;
+    private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel txtCursoId;
     private javax.swing.JTextField txtNota;
     private javax.swing.JTextField txtStudentId;
-    private javax.swing.JLabel txtTipo;
     // End of variables declaration//GEN-END:variables
 }

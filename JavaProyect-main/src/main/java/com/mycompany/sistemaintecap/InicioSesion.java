@@ -231,7 +231,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 t.setNombre(nombre);
                 t.setEmail(correo);
                 t.setPassword(pass);
-                t.setEspecialidad(nombre);
+                t.setEspecialidad(carnet);
 
                 service2.createTeacher(t);
                 JOptionPane.showMessageDialog(this, "Docente agregado correctamente.");

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.umg.proyect.model.Asignacion;
 import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.classic.methods.HttpPut;
@@ -61,6 +62,20 @@ public class AsignacionService {    private static final String BASE_URL = "http
             return mapper.readValue(is, Asignacion.class);
         }
     }
+public List<Asignacion> getAsignacionesPorCurso(int idCurso) throws Exception {
+    try (CloseableHttpClient client = HttpClients.createDefault()) {
+        HttpGet request = new HttpGet(BASE_URL);
+        ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
+        InputStream is = response.getEntity().getContent();
+        List<Asignacion> todasAsignaciones = mapper.readValue(is, new TypeReference<List<Asignacion>>() {});
+        
+        // Filtrar por curso
+        return todasAsignaciones.stream()
+                .filter(asig -> asig.getId_curse() == idCurso)
+                .collect(Collectors.toList());
+    }
+}
+
 /*
     public void deleteStudent(int id) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
