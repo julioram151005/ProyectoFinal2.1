@@ -23,7 +23,7 @@ public class UserRoleChecker {
     }
 
     private static boolean esStudent(String correo) {
-        String dominioStudent = "student.umg.com";
+        String dominioStudent = "student.intecap.com";
         try {
             String[] cSeparar = correo.split("@");
             return cSeparar[1].equalsIgnoreCase(dominioStudent);
@@ -33,7 +33,7 @@ public class UserRoleChecker {
     }
 
     private static boolean esTeacher(String correo) {
-        String dominioTeacher = "teacher.umg.com";
+        String dominioTeacher = "teacher.intecap.com";
         try {
             String[] cSeparar = correo.split("@");
             return cSeparar[1].equalsIgnoreCase(dominioTeacher);
@@ -42,10 +42,10 @@ public class UserRoleChecker {
         }
     }
     private static boolean esAdmin(String correo) {
-        String dominioTeacher = "admin.umg.com";
+        String dominioAdmin = "admin.intecap.com";
         try {
             String[] cSeparar = correo.split("@");
-            return cSeparar[1].equalsIgnoreCase(dominioTeacher);
+            return cSeparar[1].equalsIgnoreCase(dominioAdmin);
         } catch (Exception e) {
             return false;
         }

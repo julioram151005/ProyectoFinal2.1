@@ -159,14 +159,7 @@ public class Maestros extends javax.swing.JFrame {
     }//GEN-LAST:event_passClaveActionPerformed
 
     private void passClaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passClaveMouseClicked
-        if (showPassword) {
-            passClave.setEchoChar('\u2022'); 
-            lblMostrar.setText("Mostrar");
-        } else {
-            passClave.setEchoChar((char) 0);
-            lblMostrar.setText("Ocultar");
-        }
-        showPassword = !showPassword;
+
     }//GEN-LAST:event_passClaveMouseClicked
 
     private void lblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMostrarMouseClicked

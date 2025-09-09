@@ -23,7 +23,8 @@ import org.apache.hc.core5.http.ContentType;
  *
  * @author josth
  */
-public class AsignacionService {    private static final String BASE_URL = "https://proyectoprogramacion2-1.onrender.com/api/asignacion";
+public class AsignacionService {
+    private static final String BASE_URL = "https://proyectoprogramacion2-1.onrender.com/api/asignacion";
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public List<Asignacion> getAsignacion() throws Exception {

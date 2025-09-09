@@ -35,7 +35,24 @@ public class TeacherService {
             return mapper.readValue(is, new TypeReference<List<Teacher>>() {});
         }
     }
+public Teacher getTeacherById(int id) throws Exception {
+    try (CloseableHttpClient client = HttpClients.createDefault()) {
+        HttpGet request = new HttpGet(BASE_URL);
+        ClassicHttpResponse response = (ClassicHttpResponse) client.execute(request);
 
+        if (response.getCode() == 200) {
+            InputStream is = response.getEntity().getContent();
+            List<Teacher> teachers = mapper.readValue(is, new TypeReference<List<Teacher>>() {});
+
+            for (Teacher teacher : teachers) {
+                if (teacher.getId() == id) {
+                    return teacher;
+                }
+            }
+        }
+        return null;
+    }
+}
     public Teacher login(String correo, String contrasena) throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
             HttpGet request = new HttpGet(BASE_URL);
