@@ -97,7 +97,7 @@ public class CTec extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("<html><div style='text-align:center;'>Explora el mundo de la tecnología y adquiere habilidades clave en informática, herramientas digitales y tendencias actuales. <p>¡Prepárate para el futuro hoy!</div></html>");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 540, 80));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 540, 80));
 
         jButton2.setText("🏠");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -107,13 +107,15 @@ public class CTec extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 60, 40));
 
+        lblCarnet.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         lblCarnet.setForeground(new java.awt.Color(255, 255, 255));
         lblCarnet.setText("****");
-        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, -1));
+        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 220, -1));
 
+        lblNombre.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("****");
-        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 20));
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 210, 20));
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 490));
 
         pack();

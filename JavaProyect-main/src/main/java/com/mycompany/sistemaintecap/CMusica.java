@@ -94,13 +94,15 @@ public class CMusica extends javax.swing.JFrame {
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 420, 60, 40));
 
+        lblCarnet.setFont(new java.awt.Font("Rockwell Condensed", 1, 14)); // NOI18N
         lblCarnet.setForeground(new java.awt.Color(255, 255, 255));
         lblCarnet.setText("****");
-        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, -1));
+        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 220, -1));
 
+        lblNombre.setFont(new java.awt.Font("Rockwell Condensed", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("****");
-        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 20));
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 210, 20));
 
         btnSave.setText("Asignar");
         btnSave.addActionListener(new java.awt.event.ActionListener() {

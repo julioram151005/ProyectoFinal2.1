@@ -75,7 +75,7 @@ public class Asignaciones extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("¡BIENVENIDO!");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 360, 70));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 360, 70));
 
         lblhorario.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         lblhorario.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,13 +111,17 @@ public class Asignaciones extends javax.swing.JFrame {
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
 
+        lblNombre.setBackground(new java.awt.Color(255, 255, 255));
+        lblNombre.setFont(new java.awt.Font("Nirmala Text", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("****");
-        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 210, -1));
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 210, 30));
 
+        lblCarnet.setBackground(new java.awt.Color(255, 255, 255));
+        lblCarnet.setFont(new java.awt.Font("Nirmala Text", 1, 14)); // NOI18N
         lblCarnet.setForeground(new java.awt.Color(255, 255, 255));
         lblCarnet.setText("****");
-        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 220, -1));
+        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, 220, -1));
 
         btnidioma.setBackground(new java.awt.Color(51, 51, 255));
         btnidioma.setFont(new java.awt.Font("Segoe UI Black", 2, 14)); // NOI18N

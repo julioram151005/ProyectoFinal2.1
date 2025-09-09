@@ -110,13 +110,15 @@ public class CIdiomas extends javax.swing.JFrame {
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 420, 60, 40));
 
+        lblNombre.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("****");
-        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 20));
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 210, 20));
 
+        lblCarnet.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 14)); // NOI18N
         lblCarnet.setForeground(new java.awt.Color(255, 255, 255));
         lblCarnet.setText("****");
-        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, -1));
+        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 220, -1));
         getContentPane().add(lblfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 490));
 
         pack();

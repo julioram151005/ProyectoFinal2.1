@@ -130,6 +130,8 @@ public class Grado extends javax.swing.JFrame {
         getContentPane().add(txtNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 90, -1));
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 300, 80, -1));
 
+        lblDocente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblDocente.setForeground(new java.awt.Color(255, 255, 255));
         lblDocente.setText("****");
         getContentPane().add(lblDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 170, -1));
 
@@ -149,9 +151,13 @@ public class Grado extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 710, 220));
 
+        lblCurso.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblCurso.setForeground(new java.awt.Color(255, 255, 255));
         lblCurso.setText("****");
         getContentPane().add(lblCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 120, -1));
 
+        txtCursoId.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        txtCursoId.setForeground(new java.awt.Color(255, 255, 255));
         txtCursoId.setText("****");
         getContentPane().add(txtCursoId, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 40, 190, -1));
 

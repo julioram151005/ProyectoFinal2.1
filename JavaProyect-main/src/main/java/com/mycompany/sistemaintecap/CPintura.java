@@ -96,7 +96,7 @@ public class CPintura extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Sylfaen", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("<html><div style='text-align:center;'>La pintura es una forma de expresión que nos permite transformar emociones e ideas en colores y formas. En este curso aprenderás técnicas básicas y herramientas prácticas para desarrollar tu creatividad y dar vida a tu propio estilo.</div></html>");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 620, 100));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 620, 100));
 
         btnBack.setText("🏠");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -106,13 +106,15 @@ public class CPintura extends javax.swing.JFrame {
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(635, 420, 60, 40));
 
+        lblCarnet.setFont(new java.awt.Font("Leelawadee UI", 1, 14)); // NOI18N
         lblCarnet.setForeground(new java.awt.Color(255, 255, 255));
         lblCarnet.setText("****");
-        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 220, -1));
+        getContentPane().add(lblCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 220, 20));
 
+        lblNombre.setFont(new java.awt.Font("Leelawadee UI", 1, 14)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("****");
-        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 210, 20));
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 210, 20));
 
         lblfondo.setLabelFor(btnSave);
         lblfondo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

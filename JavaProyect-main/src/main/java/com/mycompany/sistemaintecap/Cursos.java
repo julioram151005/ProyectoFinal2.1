@@ -119,7 +119,7 @@ public class Cursos extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Cooper Black", 3, 100)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 255));
         jLabel2.setText("CURSOS");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, 490, 110));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 490, 110));
         getContentPane().add(lbllogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 170, 60));
 
         btnBack.setText("Regreso");
@@ -130,11 +130,15 @@ public class Cursos extends javax.swing.JFrame {
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, -1, -1));
 
+        lblNombre.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("****");
-        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 160, -1));
+        getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 160, -1));
 
+        lblEspecialidad.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        lblEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
         lblEspecialidad.setText("****");
-        getContentPane().add(lblEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 160, -1));
+        getContentPane().add(lblEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 220, 160, -1));
 
         btnNotas.setText("Evaluacion");
         btnNotas.addActionListener(new java.awt.event.ActionListener() {
