@@ -92,7 +92,7 @@ public class Grado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTableStudent.setForeground(new java.awt.Color(255, 255, 255));
+        jTableStudent.setBackground(new java.awt.Color(204, 204, 204));
         jTableStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -133,6 +133,7 @@ public class Grado extends javax.swing.JFrame {
         lblDocente.setText("****");
         getContentPane().add(lblDocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 170, -1));
 
+        jTableGrados.setBackground(new java.awt.Color(204, 204, 204));
         jTableGrados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
