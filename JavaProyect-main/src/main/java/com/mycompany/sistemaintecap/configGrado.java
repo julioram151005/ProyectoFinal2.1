@@ -77,9 +77,11 @@ public class configGrado extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtType = new javax.swing.JTextField();
         txtNote = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTableGrade.setBackground(new java.awt.Color(255, 255, 204));
         jTableGrade.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -93,6 +95,10 @@ public class configGrado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableGrade);
 
+        txtID.setBackground(new java.awt.Color(234, 233, 249));
+        txtID.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        btnUpdate.setBackground(new java.awt.Color(204, 204, 255));
         btnUpdate.setText("Actualizar");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +106,7 @@ public class configGrado extends javax.swing.JFrame {
             }
         });
 
+        btnConsultar.setBackground(new java.awt.Color(255, 255, 204));
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +116,7 @@ public class configGrado extends javax.swing.JFrame {
 
         txtId.setText("ID");
 
+        btnAdd.setBackground(new java.awt.Color(204, 255, 204));
         btnAdd.setText("Agregar");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,9 +126,21 @@ public class configGrado extends javax.swing.JFrame {
 
         jLabel4.setText("ID curso");
 
+        txtCourseId.setBackground(new java.awt.Color(234, 233, 249));
+        txtCourseId.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
         txtId1.setText("Id Estudiante");
 
-        btnExit.setText("Salir");
+        txtStudentId.setBackground(new java.awt.Color(234, 233, 249));
+        txtStudentId.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtStudentId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStudentIdActionPerformed(evt);
+            }
+        });
+
+        btnExit.setBackground(new java.awt.Color(255, 204, 204));
+        btnExit.setText("Regresar");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -131,14 +151,28 @@ public class configGrado extends javax.swing.JFrame {
 
         jLabel5.setText("Tipo:");
 
+        txtType.setBackground(new java.awt.Color(234, 233, 249));
+        txtType.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        txtNote.setBackground(new java.awt.Color(234, 233, 249));
+        txtNote.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 2, 24)); // NOI18N
+        jLabel1.setText("Grado");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(309, 309, 309)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(76, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtId)
                             .addComponent(jLabel4)
@@ -157,8 +191,8 @@ public class configGrado extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtCourseId)
-                                    .addComponent(txtStudentId, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                    .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+                                    .addComponent(txtStudentId)
+                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(txtId2)
@@ -166,16 +200,15 @@ public class configGrado extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtType)
-                                    .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                                    .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -203,9 +236,9 @@ public class configGrado extends javax.swing.JFrame {
                     .addComponent(btnUpdate)
                     .addComponent(btnAdd)
                     .addComponent(btnExit))
-                .addGap(40, 40, 40)
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -346,6 +379,10 @@ public class configGrado extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void txtStudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStudentIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStudentIdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -387,6 +424,7 @@ public class configGrado extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;

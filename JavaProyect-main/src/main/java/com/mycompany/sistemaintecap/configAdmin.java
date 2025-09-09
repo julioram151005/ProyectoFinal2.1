@@ -70,9 +70,13 @@ private final AdminService service = new AdminService();
         txtEmail = new javax.swing.JTextField();
         txtStatus = new javax.swing.JTextField();
         btnExit = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
+        jTableAdmin.setBackground(new java.awt.Color(255, 204, 204));
+        jTableAdmin.setForeground(new java.awt.Color(255, 255, 255));
         jTableAdmin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -86,6 +90,10 @@ private final AdminService service = new AdminService();
         ));
         jScrollPane1.setViewportView(jTableAdmin);
 
+        txtID.setBackground(new java.awt.Color(235, 255, 241));
+        txtID.setFont(new java.awt.Font("Pristina", 0, 12)); // NOI18N
+
+        btnUpdate.setBackground(new java.awt.Color(243, 221, 235));
         btnUpdate.setText("Actualizar");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +101,7 @@ private final AdminService service = new AdminService();
             }
         });
 
+        btnConsultar.setBackground(new java.awt.Color(204, 255, 204));
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +113,7 @@ private final AdminService service = new AdminService();
 
         jLabel2.setText("Nombre");
 
+        btnAdd.setBackground(new java.awt.Color(255, 255, 204));
         btnAdd.setText("Agregar");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +123,8 @@ private final AdminService service = new AdminService();
 
         jLabel3.setText("Correo:");
 
+        txtNombre.setBackground(new java.awt.Color(235, 255, 241));
+        txtNombre.setFont(new java.awt.Font("Pristina", 0, 12)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -121,23 +133,39 @@ private final AdminService service = new AdminService();
 
         jLabel4.setText("Contraseña:");
 
+        txtPassword.setBackground(new java.awt.Color(235, 255, 241));
+        txtPassword.setFont(new java.awt.Font("Pristina", 0, 12)); // NOI18N
+
         jLabel5.setText("Estado:");
 
-        btnExit.setText("Salir");
+        txtEmail.setBackground(new java.awt.Color(235, 255, 241));
+        txtEmail.setFont(new java.awt.Font("Pristina", 0, 12)); // NOI18N
+
+        txtStatus.setBackground(new java.awt.Color(235, 255, 241));
+        txtStatus.setFont(new java.awt.Font("Pristina", 0, 12)); // NOI18N
+
+        btnExit.setBackground(new java.awt.Color(255, 102, 153));
+        btnExit.setText("Regresar");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 2, 24)); // NOI18N
+        jLabel1.setText("Administrador");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtId)
                             .addComponent(jLabel2)
@@ -155,16 +183,20 @@ private final AdminService service = new AdminService();
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnUpdate))
                         .addGap(18, 18, 18)
                         .addComponent(btnExit))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addComponent(jLabel1)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -194,7 +226,7 @@ private final AdminService service = new AdminService();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -321,6 +353,7 @@ private final AdminService service = new AdminService();
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

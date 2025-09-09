@@ -73,9 +73,11 @@ private final StudentService service = new StudentService();
         txtId1 = new javax.swing.JLabel();
         txtCarnet = new javax.swing.JTextField();
         btnExit = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTableStudent.setBackground(new java.awt.Color(204, 204, 255));
         jTableStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -89,6 +91,9 @@ private final StudentService service = new StudentService();
         ));
         jScrollPane1.setViewportView(jTableStudent);
 
+        txtID.setBackground(new java.awt.Color(206, 255, 251));
+
+        btnUpdate.setBackground(new java.awt.Color(249, 232, 244));
         btnUpdate.setText("Actualizar");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +101,7 @@ private final StudentService service = new StudentService();
             }
         });
 
+        btnConsultar.setBackground(new java.awt.Color(204, 204, 255));
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +113,7 @@ private final StudentService service = new StudentService();
 
         jLabel2.setText("Nombre");
 
+        btnAdd.setBackground(new java.awt.Color(203, 235, 255));
         btnAdd.setText("Agregar");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,6 +123,7 @@ private final StudentService service = new StudentService();
 
         jLabel3.setText("Correo:");
 
+        txtNombre.setBackground(new java.awt.Color(206, 255, 251));
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -124,10 +132,19 @@ private final StudentService service = new StudentService();
 
         jLabel4.setText("Contraseña:");
 
+        txtPassword.setBackground(new java.awt.Color(206, 255, 251));
+
         jLabel5.setText("Estado:");
+
+        txtEmail.setBackground(new java.awt.Color(206, 255, 251));
+
+        txtStatus.setBackground(new java.awt.Color(206, 255, 251));
 
         txtId1.setText("Carnet:");
 
+        txtCarnet.setBackground(new java.awt.Color(206, 255, 251));
+
+        btnExit.setBackground(new java.awt.Color(232, 249, 248));
         btnExit.setText("Salir");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,16 +152,23 @@ private final StudentService service = new StudentService();
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("MS Reference Sans Serif", 2, 24)); // NOI18N
+        jLabel1.setText("Estudiante");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+                .addGap(302, 302, 302)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(39, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtId)
@@ -165,7 +189,7 @@ private final StudentService service = new StudentService();
                                 .addComponent(txtId1)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCarnet, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(185, 185, 185))
+                                .addGap(181, 181, 181))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(107, 107, 107)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -174,12 +198,14 @@ private final StudentService service = new StudentService();
                                     .addComponent(btnUpdate))
                                 .addGap(18, 18, 18)
                                 .addComponent(btnExit)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addGap(134, 134, 134))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtId)
@@ -212,9 +238,9 @@ private final StudentService service = new StudentService();
                             .addComponent(btnExit))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnUpdate)))
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -352,6 +378,7 @@ private final StudentService service = new StudentService();
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
