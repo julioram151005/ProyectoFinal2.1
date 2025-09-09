@@ -20,7 +20,10 @@ import javax.swing.table.DefaultTableModel;
 public class configStudent extends javax.swing.JFrame {
 private final StudentService service = new StudentService();
     private final DefaultTableModel model;
-
+        private Configuracion back;
+    public void setBack(Configuracion back) {
+        this.back = back;
+    }        
     /**
      * Creates new form Musica
      */
@@ -145,7 +148,7 @@ private final StudentService service = new StudentService();
         txtCarnet.setBackground(new java.awt.Color(206, 255, 251));
 
         btnExit.setBackground(new java.awt.Color(232, 249, 248));
-        btnExit.setText("Salir");
+        btnExit.setText("Regresar");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -335,7 +338,8 @@ private final StudentService service = new StudentService();
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        back.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     /**

@@ -15,7 +15,10 @@ import javax.swing.table.DefaultTableModel;
 public class configAsignacion extends javax.swing.JFrame {
     private final AsignacionService asignservice = new AsignacionService();
     private final DefaultTableModel model;
-
+        private Configuracion back;
+    public void setBack(Configuracion back) {
+        this.back = back;
+    }        
     public configAsignacion() {
         initComponents();
         model = new DefaultTableModel(new String[]{"ID","ID Estudiante", "ID Curso", "Especialidad", "Modalidad", "Horario"}, 0);
@@ -364,7 +367,8 @@ public class configAsignacion extends javax.swing.JFrame {
         }
     }
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        back.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     /**

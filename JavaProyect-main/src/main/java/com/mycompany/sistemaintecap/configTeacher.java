@@ -20,7 +20,10 @@ import javax.swing.table.DefaultTableModel;
 public class configTeacher extends javax.swing.JFrame {
 private final TeacherService service = new TeacherService();
     private final DefaultTableModel model;
-
+        private Configuracion back;
+    public void setBack(Configuracion back) {
+        this.back = back;
+    }        
     /**
      * Creates new form Musica
      */
@@ -145,7 +148,7 @@ private final TeacherService service = new TeacherService();
         txtSpeciality.setBackground(new java.awt.Color(230, 255, 204));
 
         btnExit.setBackground(new java.awt.Color(206, 255, 214));
-        btnExit.setText("Salir");
+        btnExit.setText("Regresar");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -330,7 +333,8 @@ private final TeacherService service = new TeacherService();
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        back.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     /**

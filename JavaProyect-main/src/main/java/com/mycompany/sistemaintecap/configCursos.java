@@ -21,7 +21,10 @@ public class configCursos extends javax.swing.JFrame {
     private final TeacherService service = new TeacherService();
     private final CursoService servicecurse = new CursoService();
     private final DefaultTableModel model;
-
+        private Configuracion back;
+    public void setBack(Configuracion back) {
+        this.back = back;
+    }        
     /**
      * Creates new form Musica
      */
@@ -148,7 +151,7 @@ public class configCursos extends javax.swing.JFrame {
         txtTeacherId.setBackground(new java.awt.Color(213, 240, 218));
 
         btnExit.setBackground(new java.awt.Color(255, 204, 204));
-        btnExit.setText("Salir");
+        btnExit.setText("Regresar");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -384,7 +387,8 @@ public class configCursos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        back.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     /**

@@ -137,6 +137,10 @@ public class Maestros extends javax.swing.JFrame {
                 com.umg.proyect.service.AdminService adminService = new com.umg.proyect.service.AdminService();
                 if (adminService.login(correo, pass)) {
                     JOptionPane.showMessageDialog(this, "Login exitoso como Administrador");
+                    Configuracion asig = new Configuracion();
+                    asig.setBack(this);
+                    asig.setVisible(true);
+                    this.setVisible(false);                    
                 } else {
                     JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos (Admin)");
                 }

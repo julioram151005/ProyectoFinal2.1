@@ -20,6 +20,10 @@ import javax.swing.table.DefaultTableModel;
 public class configAdmin extends javax.swing.JFrame {
 private final AdminService service = new AdminService();
     private final DefaultTableModel model;
+        private Configuracion back;
+    public void setBack(Configuracion back) {
+        this.back = back;
+    }        
 
     /**
      * Creates new form Musica
@@ -310,7 +314,8 @@ private final AdminService service = new AdminService();
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        back.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     /**

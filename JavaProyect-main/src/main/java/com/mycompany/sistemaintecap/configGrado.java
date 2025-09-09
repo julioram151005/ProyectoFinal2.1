@@ -21,7 +21,10 @@ public class configGrado extends javax.swing.JFrame {
     private final CursoService servicecurse = new CursoService();
     private final GradoService gradeservice = new GradoService();
     private final DefaultTableModel model;
-
+        private Configuracion back;
+    public void setBack(Configuracion back) {
+        this.back = back;
+    }        
     /**
      * Creates new form Musica
      */
@@ -376,7 +379,8 @@ public class configGrado extends javax.swing.JFrame {
         txtType.setText("");
     }
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        this.dispose();
+        back.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void txtStudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStudentIdActionPerformed
