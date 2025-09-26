@@ -4,8 +4,8 @@
   const app = express();
 
   const corsOptions = {
-    origin: "http://localhost:8081"  
-    //origin: "*"
+    //origin: "http://localhost:8081"  
+    origin: "*"
   };
 
   
@@ -14,7 +14,7 @@
   app.use(bodyParser.urlencoded({ extended: true }));
 
 
-    const db = require("./API_UNIVERSIDAD/models");
+    const db = require("./api_parcial/models/index.js");
 
   db.sequelize.sync()
     .then(() => {
@@ -25,12 +25,7 @@
     });
 
 
-  require("./API_UNIVERSIDAD/routes/student.route.js")(app);
-  require("./API_UNIVERSIDAD/routes/teacher.router.js")(app);
-  require("./API_UNIVERSIDAD/routes/curso.route.js")(app);
-  require("./API_UNIVERSIDAD/routes/asignacion.router.js")(app);
-  require("./API_UNIVERSIDAD/routes/grado.router.js")(app);
-  require("./API_UNIVERSIDAD/routes/admin.router.js")(app);
+  require("./api_parcial/routes/tarea.route.js")(app);
 
   app.get("/", (req, res) => {
     res.json({ message: "Bienvenido a la API de la UMG." });
